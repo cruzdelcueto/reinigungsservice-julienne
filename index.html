@@ -3854,6 +3854,66 @@ function copyCoupon() {
 let cart = [];
 let cartIdCounter = 0;
 
+// ─── CART PERSISTENCE (localStorage) ─────────────────────
+function saveCartToStorage() {
+  try { localStorage.setItem('jl_cart', JSON.stringify(cart)); } catch(e) {}
+}
+function loadCartFromStorage() {
+  try {
+    var saved = localStorage.getItem('jl_cart');
+    if (!saved) return;
+    var items = JSON.parse(saved);
+    if (!items || !items.length) return;
+    items.forEach(function(item) {
+      var id = ++cartIdCounter;
+      cart.push({id: id, name: item.name, sub: item.sub, price: item.price, isMain: item.isMain});
+    });
+    renderCart();
+    document.getElementById('cartFab').classList.toggle('visible', cart.length > 0);
+  } catch(e) {}
+}
+
+// ─── EXIT-INTENT / ABANDON POPUP ─────────────────────────
+var abandonShown = false;
+var ABANDON_MSG = {
+  es: {title:'¡Espera!', text:'Tienes servicios en tu presupuesto. ¿Seguro que quieres irte sin solicitar tu presupuesto gratuito?', stay:'Ver mi presupuesto', go:'Salir'},
+  de: {title:'Moment!', text:'Sie haben Leistungen in Ihrem Angebot. Möchten Sie wirklich gehen, ohne Ihr kostenloses Angebot anzufordern?', stay:'Mein Angebot ansehen', go:'Verlassen'},
+  en: {title:'Wait!', text:'You have services in your quote. Are you sure you want to leave without requesting your free quote?', stay:'View my quote', go:'Leave'},
+  fr: {title:'Attendez !', text:'Vous avez des services dans votre devis. Êtes-vous sûr(e) de vouloir partir sans demander votre devis gratuit ?', stay:'Voir mon devis', go:'Quitter'},
+  it: {title:'Aspetta!', text:'Hai servizi nel tuo preventivo. Sei sicuro/a di voler andare via senza richiedere il preventivo gratuito?', stay:'Vedi il mio preventivo', go:'Esci'},
+};
+
+function showAbandonPopup() {
+  if (abandonShown || cart.length === 0) return;
+  abandonShown = true;
+  var m = ABANDON_MSG[currentLang] || ABANDON_MSG.es;
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;';
+  overlay.innerHTML = '<div style="background:white;border-radius:20px;padding:32px;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2);margin:20px">' +
+    '<div style="font-size:32px;margin-bottom:12px">🧹</div>' +
+    '<h3 style="font-size:18px;margin-bottom:8px;color:#1A1A1A">' + m.title + '</h3>' +
+    '<p style="font-size:13px;color:#3D3D3D;line-height:1.5;margin-bottom:20px">' + m.text + '</p>' +
+    '<button onclick="this.closest(\'div\').parentElement.parentElement.remove();openCart()" style="display:block;width:100%;padding:12px;background:#8BAF9A;color:white;border:none;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;margin-bottom:8px">' + m.stay + '</button>' +
+    '<button onclick="this.closest(\'div\').parentElement.parentElement.remove()" style="display:block;width:100%;padding:10px;background:transparent;color:#3D3D3D;border:none;font-size:12px;cursor:pointer;font-family:Outfit,sans-serif;opacity:0.6">' + m.go + '</button>' +
+    '</div>';
+  document.body.appendChild(overlay);
+}
+
+// Exit intent: mouse leaves viewport top (desktop)
+document.addEventListener('mouseout', function(e) {
+  if (e.clientY < 5 && cart.length > 0) showAbandonPopup();
+});
+// Tab visibility change (mobile + desktop)
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden && cart.length > 0) {
+    saveCartToStorage();
+  }
+});
+// Before unload
+window.addEventListener('beforeunload', function() {
+  if (cart.length > 0) saveCartToStorage();
+});
+
 function addToCart(name, sub, price, btn) {
   const isExtra = !!btn.closest('.extra-card');
 
@@ -3960,6 +4020,7 @@ function renderCart() {
 
   renderCalendar();
   updateLinks();
+  saveCartToStorage();
 }
 
 function itemHTML(item) {
@@ -4999,6 +5060,7 @@ function setLang(lang) {
 // Auto-detect browser language on load
 window.addEventListener('DOMContentLoaded', function() {
   detectReferral();
+  loadCartFromStorage();
   const browserLang = (navigator.language || 'es').substring(0, 2).toLowerCase();
   const supported = ['es','de','en','fr','it'];
   if (supported.includes(browserLang)) setLang(browserLang);

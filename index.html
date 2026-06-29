@@ -2242,6 +2242,36 @@ main > *:not(.sections-video) {
   z-index: 2;
 }
 
+/* ─── BOTTOM SECTIONS VIDEO BG ─── */
+.bottom-video-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.bottom-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.bottom-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.bottom-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(244,241,236,0.65);
+  z-index: 1;
+}
+.bottom-video-wrap > *:not(.bottom-video) {
+  position: relative;
+  z-index: 2;
+}
+
 /* ─── UPSELL POPUPS & CURTAINS ─── */
 @keyframes upsell-slide-in {
   from { transform: translateX(110%); opacity: 0; }
@@ -3149,6 +3179,15 @@ main > *:not(.sections-video) {
 
 </main>
 
+<!-- ─── BOTTOM SECTIONS WITH VIDEO BG ─── -->
+<div class="bottom-video-wrap">
+  <div class="bottom-video">
+    <video autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-video-overlay"></div>
+  </div>
+
 <!-- ─── BENEFITS ─── -->
 <section class="benefits-section">
   <div class="container">
@@ -3537,6 +3576,8 @@ main > *:not(.sections-video) {
 
   </div>
 </section>
+
+</div><!-- /bottom-video-wrap -->
 
 <!-- ─── FOOTER ─── -->
 <footer>

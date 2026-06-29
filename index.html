@@ -965,6 +965,25 @@ main {
   padding: 16px;
   margin-bottom: 16px;
 }
+.datepicker-toggle {
+  display: none;
+  width: 100%;
+  background: var(--mist);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.datepicker-toggle::after {
+  content: ' ▾';
+  float: right;
+}
 
 .datepicker-label {
   font-size: 12px;
@@ -2496,6 +2515,12 @@ main > *:not(.sections-video) {
   .upsell-toast { right: 10px; left: 10px; width: auto; bottom: 90px; }
   .upsell-curtain { padding: 12px 44px 12px 14px; font-size: 12px; flex-wrap: wrap; }
   .upsell-proof { left: 10px; right: 10px; max-width: none; bottom: 18px; }
+  .cart-fab { bottom: 100px; right: 24px; font-size: 12px; padding: 10px 16px; }
+  .datepicker-toggle { display: block; }
+  .datepicker-block { display: none; }
+  .datepicker-block.open { display: block; }
+  .cal-day { font-size: 11px; }
+  .cal-grid { gap: 2px; }
 }
 
 
@@ -3703,6 +3728,7 @@ main > *:not(.sections-video) {
     <p class="cart-total-note">* Los servicios "a consultar" no están incluidos en el total. El precio final se confirma tras hablar con Julienne.</p>
 
     <!-- ── DATE PICKER ── -->
+    <button class="datepicker-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'📅 Ocultar calendario':'📅 Elegir fecha y hora'">📅 Elegir fecha y hora</button>
     <div class="datepicker-block">
       <div class="datepicker-label">📅 Elige una fecha</div>
 

@@ -4625,6 +4625,7 @@ const MSG = {
     formMsg: 'Mensaje',
     formContact: 'Puedes contactarme en',
     formThanks: '¡Gracias!',
+    formDate: 'Fecha provisional',
     sending: 'Enviando...',
   },
   de: {
@@ -4649,6 +4650,7 @@ const MSG = {
     formMsg: 'Nachricht',
     formContact: 'Sie erreichen mich unter',
     formThanks: 'Vielen Dank!',
+    formDate: 'Vorläufiges Datum',
     sending: 'Wird gesendet...',
   },
   en: {
@@ -4673,6 +4675,7 @@ const MSG = {
     formMsg: 'Message',
     formContact: 'You can reach me at',
     formThanks: 'Thank you!',
+    formDate: 'Provisional date',
     sending: 'Sending...',
   },
   fr: {
@@ -4697,6 +4700,7 @@ const MSG = {
     formMsg: 'Message',
     formContact: 'Vous pouvez me contacter à',
     formThanks: 'Merci !',
+    formDate: 'Date provisoire',
     sending: 'Envoi en cours...',
   },
   it: {
@@ -4721,6 +4725,7 @@ const MSG = {
     formMsg: 'Messaggio',
     formContact: 'Puoi contattarmi a',
     formThanks: 'Grazie!',
+    formDate: 'Data provvisoria',
     sending: 'Invio in corso...',
   },
 };
@@ -5023,10 +5028,24 @@ function submitContactForm() {
   btn.textContent = fm.sending;
   btn.disabled = true;
 
+  var dateInfo = '';
+  if (selectedDate && selectedSlot) {
+    var m = MSG[currentLang] || MSG.es;
+    var dd = m.days || ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    var mm = m.months || ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    dateInfo = '\n' + fm.formDate + ': ' + dd[selectedDate.getDay()] + ' ' + selectedDate.getDate() + ' ' + mm[selectedDate.getMonth()] + ' ' + selectedDate.getFullYear() + ' ' + (m.at || 'a las') + ' ' + selectedSlot + 'h\n';
+  } else if (selectedDate) {
+    var m = MSG[currentLang] || MSG.es;
+    var dd = m.days || ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    var mm = m.months || ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    dateInfo = '\n' + fm.formDate + ': ' + dd[selectedDate.getDay()] + ' ' + selectedDate.getDate() + ' ' + mm[selectedDate.getMonth()] + ' ' + selectedDate.getFullYear() + '\n';
+  }
+
   const body =
     fm.formGreeting + '\n\n' +
     fm.formIntro.replace('{name}', name) + '\n\n' +
     (service ? fm.formService + ': ' + service + '\n' : '') +
+    dateInfo +
     (message ? '\n' + fm.formMsg + ':\n' + message + '\n' : '') +
     '\n' + fm.formContact + ': ' + contact + '\n\n' + fm.formThanks;
 
@@ -5042,6 +5061,7 @@ function submitContactForm() {
       nombre:   name,
       contacto: contact,
       servicio: service || '—',
+      fecha:    dateInfo.trim() || '—',
       mensaje:  message || '—'
     })
   })

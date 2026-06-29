@@ -2260,7 +2260,7 @@ main > *:not(.sections-video) {
   position: absolute;
   top: 0;
   left: 0;
-  transform: rotate(180deg);
+  transform: scaleX(-1) scaleY(-1);
 }
 .bottom-video-overlay {
   position: absolute;
@@ -2273,8 +2273,10 @@ main > *:not(.sections-video) {
   z-index: 2;
 }
 .bottom-video-wrap .testimonials-section,
+.bottom-video-wrap .benefits-section,
 .bottom-video-wrap .faq-section,
-.bottom-video-wrap .discounts-section {
+.bottom-video-wrap .discounts-section,
+.bottom-video-wrap .contact-section {
   background: transparent;
 }
 

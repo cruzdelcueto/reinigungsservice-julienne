@@ -2215,6 +2215,39 @@ footer strong {
   footer { padding: 32px 20px; }
 }
 
+/* ─── SECTIONS VIDEO BG ─── */
+.sections-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.sections-video video {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+.sections-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(244,241,236,0.88) 0%,
+    rgba(244,241,236,0.82) 30%,
+    rgba(244,241,236,0.85) 60%,
+    rgba(244,241,236,0.9) 100%
+  );
+  z-index: 1;
+}
+main > *:not(.sections-video) {
+  position: relative;
+  z-index: 2;
+}
+
 /* ─── UPSELL POPUPS & CURTAINS ─── */
 @keyframes upsell-slide-in {
   from { transform: translateX(110%); opacity: 0; }
@@ -2894,7 +2927,13 @@ footer strong {
 </div>
 
 <!-- ─── MAIN ─── -->
-<main>
+<main style="position:relative;overflow:hidden">
+  <div class="sections-video">
+    <video autoplay muted loop playsinline id="sectionsVideo">
+      <source src="sections-video.mp4" type="video/mp4">
+    </video>
+    <div class="sections-video-overlay"></div>
+  </div>
 
   <!-- ── REGULAR CLEANING ── -->
   <div class="container">
@@ -4960,14 +4999,14 @@ function resetContactForm() {
 
 <!-- ─── CHATBOT WIDGET ─── -->
 <div class="cb-fab" id="cbFab" onclick="toggleChatbot()">
-  <img src="data:image/jpeg;base64,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" alt="Julienne">
+  <img src="data:image/jpeg;base64,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" alt="Julienne">
   <div class="cb-fab-ripple"></div>
   <div class="cb-fab-badge">?</div>
 </div>
 
 <div class="cb-panel" id="cbPanel">
   <div class="cb-header">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDq0iqdYqkSOpVStuYz5CNYqlWOpFSpFX2pcw+UYsdSolOC1Iq1LkPlBUp4UUvAFcDrHjPVdTM8PhmELFGShu5DgFgedvr9anmKUbuyPQAtPC15x4W8c6lDc/ZPEAMiswUSkYZD0OcdRn8a9KUggEHIPelcHG24BaeFoFOFFwDbRTqKAOcUCpBiuVl8Tzea4iEARWIBZqqr8QI4wFa1kuHDEN5QAA/OmB3AxTxiua03xppN9GWZnhYHlXXmrcvifT7ZVMonUONyZiI3j1HtSuVys3QRTwawR4o04okpEqxs23eU4zWtDdwSqCkg57Z5pXFYNTZxpV2YyVcQOVI6g7TXl9neSaZ9g0lbd2byxvbnhjyfrya9TlxNbyRKwy6FfpkYrzKW9vYbtnYhFTKKGQnBHBBAHWokdWHWvmZOoavDeCW4jQq0MqjDdT/nFepeDtXXUtEiBbMkI2Hnkjsa8V1y7kkjR9iqcgOFxkkZPOO+K634dar5F20Lv8pJ79P85qF7uoVPek0evB6cGriZ/iLpdveTWjiQPEcbscE1NYeNIdQuokhB2HhjWnMjmSOy30VTF0hAO8DPvRTuFj5xg024RHe5jZhjjExFaNnpQgeKdrsIFYN5Y5xXdDwdG0UbyXyqoHzbsHNY+p6HpFkPNj1dZpSeY+ORSUn1D0KhlhikE0M8SnduPHBrVg1qXVmiskVbmbGxPRR6e1clJcNkKLZQoPGWq1pMl+yuLKONQCdzbvu0iuZ7G/Frt5YWU1osXyPmNt8ecc9jUkeqXk8chWJQQOSWANZX23UXsWMl1amJMfIBk5rR8P6Y97qIupgDaoQzLj7/ALY+tWrt2sK3Y1HvdYtLJbuTdDDGmWcHOeM/nWPeSXeo2wuZS0M8xLkKegPv9K6XU2k1ixmt8LbFHKxIWGXKkE/iQP1rMCu0WAAcjg0q0OWyO3DxVr9TznULNoLhFY5S6y6KeCMcA/jz+lTeGtSNnfgEnDAocdcf/WpPEE0p1KKFif3DnafTntUGBNqYa2jDK4DMin7rcg4+vBx71E1dWME7TujsZ9GH2yTUHg80yKCM8Dd64qK4TyTG0KyQFvvGM102jJI2lxJcxMOPk8xcEjp0+uRTb7Q7e8+YZQj06U4pqFrGVRLmZUsvEE9lbCGCRp0BzvlIJzRVZvDtwjEIAV9aKycnf4SbMyItKdLYTX3iBIWH8AbOKivJtCtrMG2Vru8/57twDWovheK70+0aLYSE+bzByTTYvA8bzEXJXy8YGw4wa6eVdibnOxTowzcwSnn7qDrWnZzW9nbfao7SeNWfacDqfeur0/w5pmnj5YzKfWQ5rQFlZbdvkLik4NjUrHHaLqWk2l5LcX+lvdBt22EpwSRXSeGRHHpguIwyiWQKwb8uKtmy09FyYF4p0ypapGkMbKF2Ebfc5I9+DW1KPvF01dssmJJRIpAJcgjI7kkH9BXl3iPX9SXxfe6dZXpgtUnI/dqMqoALc47c16ZEZPtSkDjHHboTXiuvlrbW9XZj+8luXjH0zlv0wPxq62qQ22lozotO8PN4r0B9QaYxzrLKYsjgoCuAfoSa77w5odvpWmvCiI1wA2+TGdxwDwfT0rB+HkmfDNqmOCLgH67s/wCFblrqFxb6hG+0NbMFV/UM3Q/pQoK10a01fU1tQ5WFh2BX+R/rVMPV3VFCxKyn5SVIP1BH9Kzg+RWT3MZqzJsmiog470VBBV+0KgxkAUxr3kjIwPesmS4yMhun61We9UIQDyetbyVjCLudB9uG8rkdKU3gUZZsCuWi1DLfN2qGfUZMsu/CZHPc/QVHMrF8rOjl1M3FzDaWpVriVwqhmwPzroNRmW2t3fZzjdkkADP/AOoCuM0TTZLedtXlyhjBaFGzxx1OOag13xneS34063gihCAvM75YAdcYNaUnrr1NVKMIuUtjtWeRFtJJCu7biTHQYXLfqa8U8UxyNr93IIZFieQumVJyG+bOfxr0G18SJrdjBZFfInlYLIo4DISMlfwGMHnB71o3bql7NGqZQHA5x2/+vRWeg7qUboofDtdvhiyc9rmQH6E4rXs5JFeS38y3dUfDLI+0gZ4wccH/ABqXSXU2koAxsffj8Qax7+9ntdauRaPHgNyHjDYfn+mKPaKELs6KSb0R191G50ZVDB/JfliRkr2/WssfWq2n6tctp7291Eiu2AGRyc85OQeh/GplfNYtp6oyqfES49qKbk/3qKkzOLa67Zqlc3AVsjjPWqzz5/pTZ4LlIfPaIlD/AAN1PvW1SRz00IbxVQgZOTx6mut0HSk2rdXCK74GzcOg+lYnhTQpXdb+8BResUZHJ9zXaKwVepwOlZRj1Zs2M1CYQ2jntjFcDrbJLqkhAwrInmHHUYyB+v6V3t1GLi2khbgOuCRXD6j4f1jzJJ32XC8DcrAEgAAcflW1JpTuyK95UeSO9yTwfH9t8VRKwBRI3P4kYH6ZrpryTOoyHgqJmXPbtVbw9oz6GDcT4Eixs8h9CR0/AD9ahtpTLZQTNnfK5lP/AALmlXlculT9nTUTXsr2K3a4DYXKNwD19KPD+lnVdUeacDbkvIexJ6D88VitJ5l2xJ+7wB+PNdt4djjt7eKRE27ly+P4s8GuVy52oHoU1y0+Y5+JwZmVgUdGII+nFXUfJxVHX5pdP1+6jS3MgL7htHY8/wBangk3IHxjI71aZxtFsk9qKYG46mimScDpsab/ADGQOQDgN0rYsM3moRxTMSmwybe2R/SiiqfxGcdjpBCiqGGc49aBypJ7GiiqGQuxFQ3Y/wBAb3HNFFJ7DD7VLL4W1GSQ7niEiBj1Ix3/AArKs1H9lWh5/wBWv8hRRUz2Rq9hJI1ilJUYLMik+26ut8Mu0umgsT/GP/HVNFFYQ/inbF/uSj4ylKaiHAGRAp+tUrSRmhRj3FFFav4jjZeQnbRRRQQf/9k=" alt="Julienne" class="cb-header-photo">
+    <img src="data:image/jpeg;base64,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" alt="Julienne" class="cb-header-photo">
     <div>
       <div class="cb-header-name">Julienne</div>
       <div class="cb-header-status" id="cbStatus">Online</div>
@@ -5223,17 +5262,29 @@ const CB_FAQ = {
       {label: '💰 Precios', key: 'prices'},
       {label: '🕐 Horarios', key: 'hours'},
       {label: '🧹 Servicios', key: 'services'},
+      {label: '🏠 Extras', key: 'extras'},
       {label: '🐾 Mascotas', key: 'pets'},
       {label: '💳 Pago', key: 'payment'},
       {label: '📍 Zonas', key: 'zones'},
+      {label: '📅 Reservar', key: 'booking'},
+      {label: '❌ Cancelar', key: 'cancel'},
+      {label: '🧴 Productos', key: 'products'},
+      {label: '⭐ Referencias', key: 'refs'},
+      {label: '🎁 Descuento', key: 'discount'},
     ],
     answers: {
-      prices: 'Limpieza regular: CHF 40/hora. Limpieza puntual (mudanza, profunda): CHF 55/hora. El precio exacto depende del tamaño de tu piso — te doy un presupuesto gratuito sin compromiso.',
-      hours: 'Trabajo de lunes a viernes, de 8h a 16h. ¿Quieres reservar un horario?',
-      services: 'Ofrezco limpieza regular (semanal/quincenal), limpieza puntual (mudanza, post-obra), y servicios adicionales como ventanas, horno, frigorífico, terraza y más.',
-      pets: 'Las mascotas son bienvenidas. Tengo experiencia con perros y gatos. Hay un pequeño suplemento por el esfuerzo extra.',
-      payment: 'Acepto TWINT, transferencia bancaria y efectivo. El pago se realiza tras el servicio.',
-      zones: 'Trabajo en Luzern, Zug y alrededores. Si no estás seguro/a, pregúntame y te confirmo.',
+      prices: 'Limpieza regular: CHF 40/hora (piso pequeño ~2h = CHF 80, mediano ~3h = CHF 120, grande ~4.5h = CHF 180). Limpieza puntual: CHF 55/hora (mudanza, profunda, post-obra). Casas 6+ habitaciones: precio tras visita gratuita.',
+      hours: 'Trabajo de lunes a viernes, de 8h a 16h. Fines de semana no disponible. ¿Quieres reservar un horario?',
+      services: 'Ofrezco: 1) Limpieza regular semanal/quincenal (CHF 40/h), 2) Limpieza puntual para mudanza, post-obra o profunda (CHF 55/h), 3) Servicios adicionales individuales. Todo se adapta a tu hogar.',
+      extras: 'Servicios adicionales: Limpieza de ventanas, horno profundo (CHF 30), interior frigorífico (CHF 20), eliminación de cal (CHF 25-30), aspirado tapicería (CHF 22), lavado ropa (CHF 20), limpieza post-obra (individual), terraza (CHF 40).',
+      pets: 'Las mascotas son bienvenidas. Tengo experiencia con perros y gatos — pelos, olores e higiene extra contemplados. Hay un pequeño suplemento.',
+      payment: 'Acepto TWINT, transferencia bancaria y efectivo. El pago se realiza después del servicio, no por adelantado.',
+      zones: 'Trabajo en Luzern, Zug y alrededores (Horw, Kriens, Emmenbrücke, Baar, Cham...). Si dudas, pregúntame y te confirmo.',
+      booking: 'Recomiendo reservar con 3-5 días de antelación. Para limpiezas puntuales, 1-2 semanas es ideal. ¿Urgencia? Escríbeme por WhatsApp directamente.',
+      cancel: 'Puedes cancelar o cambiar fecha con 24h de antelación sin coste. Con menos de 24h puede aplicarse un 50%. Contáctame por WhatsApp.',
+      products: 'No traigo productos de limpieza — el cliente proporciona los productos y materiales necesarios. Si no sabes qué tener, te oriento al reservar.',
+      refs: 'Tengo una valoración de 5.0 en Google Business. Puedo ponerte en contacto con clientes actuales como Vicky, Nicole o Ileana para que compartan su experiencia.',
+      discount: 'Tras tu primera reserva recibes un cupón personal de -5%. Compártelo con alguien — cuando lo use, ambos recibís -5% en la próxima visita.',
     },
     waPrompt: '¿Quieres que hablemos por WhatsApp?',
     waBtn: '💬 Abrir WhatsApp',
@@ -5246,17 +5297,29 @@ const CB_FAQ = {
       {label: '💰 Preise', key: 'prices'},
       {label: '🕐 Zeiten', key: 'hours'},
       {label: '🧹 Leistungen', key: 'services'},
+      {label: '🏠 Extras', key: 'extras'},
       {label: '🐾 Haustiere', key: 'pets'},
       {label: '💳 Zahlung', key: 'payment'},
       {label: '📍 Gebiete', key: 'zones'},
+      {label: '📅 Buchen', key: 'booking'},
+      {label: '❌ Stornieren', key: 'cancel'},
+      {label: '🧴 Produkte', key: 'products'},
+      {label: '⭐ Referenzen', key: 'refs'},
+      {label: '🎁 Rabatt', key: 'discount'},
     ],
     answers: {
-      prices: 'Regelmässige Reinigung: CHF 40/Std. Einmalreinigung (Umzug, Tiefenreinigung): CHF 55/Std. Der genaue Preis hängt von der Wohnungsgrösse ab — ich erstelle Ihnen ein kostenloses Angebot.',
-      hours: 'Ich arbeite Montag bis Freitag, 8–16 Uhr. Möchten Sie einen Termin buchen?',
-      services: 'Ich biete regelmässige Reinigung (wöchentlich/zweiwöchentlich), Einmalreinigung (Umzug, Renovation) und Zusatzleistungen wie Fenster, Backofen, Kühlschrank, Terrasse und mehr.',
-      pets: 'Haustiere sind willkommen. Ich habe Erfahrung mit Hunden und Katzen. Es gibt einen kleinen Aufpreis für den erhöhten Aufwand.',
-      payment: 'Ich akzeptiere TWINT, Banküberweisung und Bargeld. Die Zahlung erfolgt nach dem Service.',
-      zones: 'Ich arbeite in Luzern, Zug und Umgebung. Falls Sie unsicher sind, fragen Sie mich einfach.',
+      prices: 'Regelmässige Reinigung: CHF 40/Std. (kleine Whg ~2Std = CHF 80, mittlere ~3Std = CHF 120, grosse ~4.5Std = CHF 180). Einmalreinigung: CHF 55/Std. Häuser 6+ Zimmer: Preis nach kostenloser Besichtigung.',
+      hours: 'Montag bis Freitag, 8–16 Uhr. Wochenende nicht verfügbar. Möchten Sie einen Termin buchen?',
+      services: '1) Regelmässige Reinigung wöchentlich/zweiwöchentlich (CHF 40/Std), 2) Einmalreinigung für Umzug, Renovation, Tiefenreinigung (CHF 55/Std), 3) Individuelle Zusatzleistungen.',
+      extras: 'Zusatzleistungen: Fensterreinigung, Backofen (CHF 30), Kühlschrank innen (CHF 20), Kalkentfernung (CHF 25-30), Polster absaugen (CHF 22), Wäsche (CHF 20), Renovationsreinigung (individuell), Terrasse (CHF 40).',
+      pets: 'Haustiere willkommen. Erfahrung mit Hunden und Katzen — Tierhaare, Gerüche und Hygiene berücksichtigt. Kleiner Aufpreis.',
+      payment: 'TWINT, Banküberweisung und Bargeld. Die Zahlung erfolgt nach dem Service, nicht im Voraus.',
+      zones: 'Luzern, Zug und Umgebung (Horw, Kriens, Emmenbrücke, Baar, Cham...). Bei Unsicherheit einfach fragen.',
+      booking: 'Bitte 3-5 Tage im Voraus buchen. Für Einmalreinigungen 1-2 Wochen ideal. Dringend? Direkt per WhatsApp melden.',
+      cancel: 'Stornierung/Umbuchung bis 24 Std. vorher kostenlos. Unter 24 Std. kann 50% berechnet werden. Kontakt per WhatsApp.',
+      products: 'Ich bringe keine Reinigungsmittel mit — der Kunde stellt Produkte und Materialien bereit. Gerne berate ich bei der Buchung.',
+      refs: '5.0 Bewertung auf Google Business. Ich kann Kontakt zu aktuellen Kundinnen wie Vicky, Nicole oder Ileana herstellen.',
+      discount: 'Nach der ersten Buchung erhalten Sie einen persönlichen -5% Gutschein. Teilen Sie ihn — beide erhalten -5% auf den nächsten Einsatz.',
     },
     waPrompt: 'Möchten Sie per WhatsApp sprechen?',
     waBtn: '💬 WhatsApp öffnen',
@@ -5269,17 +5332,29 @@ const CB_FAQ = {
       {label: '💰 Prices', key: 'prices'},
       {label: '🕐 Hours', key: 'hours'},
       {label: '🧹 Services', key: 'services'},
+      {label: '🏠 Extras', key: 'extras'},
       {label: '🐾 Pets', key: 'pets'},
       {label: '💳 Payment', key: 'payment'},
       {label: '📍 Areas', key: 'zones'},
+      {label: '📅 Booking', key: 'booking'},
+      {label: '❌ Cancel', key: 'cancel'},
+      {label: '🧴 Products', key: 'products'},
+      {label: '⭐ References', key: 'refs'},
+      {label: '🎁 Discount', key: 'discount'},
     ],
     answers: {
-      prices: 'Regular cleaning: CHF 40/hr. One-time cleaning (moving, deep clean): CHF 55/hr. The exact price depends on flat size — I give you a free no-obligation quote.',
-      hours: 'I work Monday to Friday, 8am to 4pm. Would you like to book a time?',
-      services: 'I offer regular cleaning (weekly/bi-weekly), one-time cleaning (moving, post-renovation), and extras like windows, oven, fridge, terrace and more.',
-      pets: 'Pets are welcome. I have experience with dogs and cats. There is a small surcharge for the extra effort.',
-      payment: 'I accept TWINT, bank transfer and cash. Payment is made after the service.',
-      zones: 'I work in Luzern, Zug and surrounding areas. If you\'re not sure, just ask and I\'ll confirm.',
+      prices: 'Regular cleaning: CHF 40/hr (small flat ~2h = CHF 80, medium ~3h = CHF 120, large ~4.5h = CHF 180). One-time cleaning: CHF 55/hr (moving, deep, post-renovation). Houses 6+ rooms: price after free visit.',
+      hours: 'Monday to Friday, 8am to 4pm. Weekends not available. Would you like to book?',
+      services: '1) Regular weekly/bi-weekly cleaning (CHF 40/hr), 2) One-time cleaning for moves, renovation, deep clean (CHF 55/hr), 3) Individual add-on services.',
+      extras: 'Add-ons: Window cleaning, deep oven clean (CHF 30), fridge interior (CHF 20), limescale removal (CHF 25-30), upholstery vacuuming (CHF 22), laundry (CHF 20), post-renovation (individual), terrace (CHF 40).',
+      pets: 'Pets welcome. Experience with dogs and cats — hair, odours and extra hygiene covered. Small surcharge applies.',
+      payment: 'TWINT, bank transfer and cash. Payment after the service, not in advance.',
+      zones: 'Luzern, Zug and surroundings (Horw, Kriens, Emmenbrücke, Baar, Cham...). Not sure? Just ask.',
+      booking: 'Book 3-5 days in advance. For one-time cleans, 1-2 weeks is ideal. Urgent? Message me on WhatsApp directly.',
+      cancel: 'Free cancellation/reschedule up to 24h before. Under 24h a 50% charge may apply. Contact via WhatsApp.',
+      products: 'I do not bring cleaning products — the client provides products and materials. I can advise you when booking.',
+      refs: '5.0 rating on Google Business. I can connect you with current clients like Vicky, Nicole or Ileana to share their experience.',
+      discount: 'After your first booking you get a personal -5% coupon. Share it — when someone uses it, you both get -5% off your next visit.',
     },
     waPrompt: 'Would you like to chat on WhatsApp?',
     waBtn: '💬 Open WhatsApp',
@@ -5292,17 +5367,29 @@ const CB_FAQ = {
       {label: '💰 Prix', key: 'prices'},
       {label: '🕐 Horaires', key: 'hours'},
       {label: '🧹 Services', key: 'services'},
+      {label: '🏠 Extras', key: 'extras'},
       {label: '🐾 Animaux', key: 'pets'},
       {label: '💳 Paiement', key: 'payment'},
       {label: '📍 Zones', key: 'zones'},
+      {label: '📅 Réserver', key: 'booking'},
+      {label: '❌ Annuler', key: 'cancel'},
+      {label: '🧴 Produits', key: 'products'},
+      {label: '⭐ Références', key: 'refs'},
+      {label: '🎁 Remise', key: 'discount'},
     ],
     answers: {
-      prices: 'Nettoyage régulier : CHF 40/h. Nettoyage ponctuel (déménagement, profond) : CHF 55/h. Le prix exact dépend de la taille — je vous fais un devis gratuit.',
-      hours: 'Je travaille du lundi au vendredi, de 8h à 16h. Souhaitez-vous réserver ?',
-      services: 'Je propose nettoyage régulier (hebdomadaire), nettoyage ponctuel (déménagement, rénovation) et des extras comme vitres, four, frigo, terrasse et plus.',
-      pets: 'Les animaux sont les bienvenus. J\'ai l\'expérience avec chiens et chats. Un petit supplément est appliqué.',
-      payment: 'J\'accepte TWINT, virement bancaire et espèces. Le paiement se fait après le service.',
-      zones: 'Je travaille à Luzern, Zug et environs. Si vous n\'êtes pas sûr(e), demandez-moi.',
+      prices: 'Nettoyage régulier : CHF 40/h (petit appt ~2h = CHF 80, moyen ~3h = CHF 120, grand ~4.5h = CHF 180). Nettoyage ponctuel : CHF 55/h. Maisons 6+ ch : prix après visite gratuite.',
+      hours: 'Lundi au vendredi, 8h à 16h. Week-end non disponible. Souhaitez-vous réserver ?',
+      services: '1) Nettoyage régulier hebdomadaire (CHF 40/h), 2) Nettoyage ponctuel pour déménagement, rénovation (CHF 55/h), 3) Services supplémentaires individuels.',
+      extras: 'Suppléments : Vitres, four profond (CHF 30), frigo intérieur (CHF 20), détartrage (CHF 25-30), meubles rembourrés (CHF 22), lessive (CHF 20), après travaux (individuel), terrasse (CHF 40).',
+      pets: 'Animaux bienvenus. Expérience chiens et chats — poils, odeurs et hygiène extra pris en compte. Petit supplément.',
+      payment: 'TWINT, virement bancaire et espèces. Paiement après le service, pas à l\'avance.',
+      zones: 'Luzern, Zug et alentours (Horw, Kriens, Emmenbrücke, Baar, Cham...). Pas sûr(e) ? Demandez-moi.',
+      booking: 'Réservez 3-5 jours à l\'avance. Pour les ponctuels, 1-2 semaines idéal. Urgent ? WhatsApp directement.',
+      cancel: 'Annulation/report gratuit jusqu\'à 24h avant. Moins de 24h : 50% possible. Contact par WhatsApp.',
+      products: 'Je n\'apporte pas de produits — le client fournit produits et matériaux. Je vous conseille lors de la réservation.',
+      refs: 'Note 5.0 sur Google Business. Je peux vous mettre en contact avec des clientes comme Vicky, Nicole ou Ileana.',
+      discount: 'Après la première réservation, vous recevez un coupon -5%. Partagez-le — quand quelqu\'un l\'utilise, vous obtenez tous les deux -5%.',
     },
     waPrompt: 'Voulez-vous discuter sur WhatsApp ?',
     waBtn: '💬 Ouvrir WhatsApp',
@@ -5315,17 +5402,29 @@ const CB_FAQ = {
       {label: '💰 Prezzi', key: 'prices'},
       {label: '🕐 Orari', key: 'hours'},
       {label: '🧹 Servizi', key: 'services'},
+      {label: '🏠 Extra', key: 'extras'},
       {label: '🐾 Animali', key: 'pets'},
       {label: '💳 Pagamento', key: 'payment'},
       {label: '📍 Zone', key: 'zones'},
+      {label: '📅 Prenotare', key: 'booking'},
+      {label: '❌ Annullare', key: 'cancel'},
+      {label: '🧴 Prodotti', key: 'products'},
+      {label: '⭐ Referenze', key: 'refs'},
+      {label: '🎁 Sconto', key: 'discount'},
     ],
     answers: {
-      prices: 'Pulizia regolare: CHF 40/ora. Pulizia una tantum (trasloco, profonda): CHF 55/ora. Il prezzo esatto dipende dalla dimensione — ti faccio un preventivo gratuito.',
-      hours: 'Lavoro dal lunedì al venerdì, dalle 8 alle 16. Vuoi prenotare?',
-      services: 'Offro pulizia regolare (settimanale), pulizia una tantum (trasloco, ristrutturazione) e servizi extra come finestre, forno, frigo, terrazza e altro.',
-      pets: 'Gli animali sono benvenuti. Ho esperienza con cani e gatti. C\'è un piccolo supplemento per lo sforzo extra.',
-      payment: 'Accetto TWINT, bonifico bancario e contanti. Il pagamento avviene dopo il servizio.',
-      zones: 'Lavoro a Luzern, Zug e dintorni. Se non sei sicuro/a, chiedimi e ti confermo.',
+      prices: 'Pulizia regolare: CHF 40/ora (piccolo ~2h = CHF 80, medio ~3h = CHF 120, grande ~4.5h = CHF 180). Una tantum: CHF 55/ora. Case 6+ camere: prezzo dopo visita gratuita.',
+      hours: 'Lunedì a venerdì, 8–16. Weekend non disponibile. Vuoi prenotare?',
+      services: '1) Pulizia regolare settimanale (CHF 40/ora), 2) Pulizia una tantum per trasloco, ristrutturazione (CHF 55/ora), 3) Servizi extra individuali.',
+      extras: 'Extra: Finestre, forno profondo (CHF 30), frigo interno (CHF 20), rimozione calcare (CHF 25-30), tappezzeria (CHF 22), biancheria (CHF 20), post-ristrutturazione (individuale), terrazza (CHF 40).',
+      pets: 'Animali benvenuti. Esperienza con cani e gatti — peli, odori e igiene extra contemplati. Piccolo supplemento.',
+      payment: 'TWINT, bonifico bancario e contanti. Pagamento dopo il servizio, non anticipato.',
+      zones: 'Luzern, Zug e dintorni (Horw, Kriens, Emmenbrücke, Baar, Cham...). Non sicuro/a? Chiedimi.',
+      booking: 'Prenota con 3-5 giorni di anticipo. Per una tantum, 1-2 settimane ideale. Urgente? WhatsApp direttamente.',
+      cancel: 'Cancellazione/modifica gratuita fino a 24h prima. Sotto 24h possibile addebito 50%. Contatto WhatsApp.',
+      products: 'Non porto prodotti — il cliente fornisce prodotti e materiali. Ti consiglio al momento della prenotazione.',
+      refs: 'Valutazione 5.0 su Google Business. Posso metterti in contatto con clienti come Vicky, Nicole o Ileana.',
+      discount: 'Dopo la prima prenotazione ricevi un coupon -5%. Condividilo — quando qualcuno lo usa, entrambi ottenete -5%.',
     },
     waPrompt: 'Vuoi chattare su WhatsApp?',
     waBtn: '💬 Apri WhatsApp',

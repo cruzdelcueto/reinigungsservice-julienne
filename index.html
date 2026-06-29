@@ -2260,6 +2260,7 @@ main > *:not(.sections-video) {
   position: absolute;
   top: 0;
   left: 0;
+  transform: rotate(180deg);
 }
 .bottom-video-overlay {
   position: absolute;
@@ -3179,15 +3180,6 @@ main > *:not(.sections-video) {
 
 </main>
 
-<!-- ─── BOTTOM SECTIONS WITH VIDEO BG ─── -->
-<div class="bottom-video-wrap">
-  <div class="bottom-video">
-    <video autoplay muted loop playsinline>
-      <source src="hero-video.mp4" type="video/mp4">
-    </video>
-    <div class="bottom-video-overlay"></div>
-  </div>
-
 <!-- ─── BENEFITS ─── -->
 <section class="benefits-section">
   <div class="container">
@@ -3243,6 +3235,15 @@ main > *:not(.sections-video) {
     </div>
   </div>
 </section>
+
+<!-- ─── BOTTOM SECTIONS WITH VIDEO BG (from section 04) ─── -->
+<div class="bottom-video-wrap">
+  <div class="bottom-video">
+    <video autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="bottom-video-overlay"></div>
+  </div>
 
 <!-- ─── TESTIMONIALS ─── -->
 <section class="testimonials-section">

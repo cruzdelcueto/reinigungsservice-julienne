@@ -5330,24 +5330,86 @@ setInterval(function() {
 }, 25000);
 setTimeout(function() { showUpsellProof(); }, 35000);
 
-// ─── HERO VIDEO PARALLAX ─────────────────────────────────
+// ─── PARALLAX + ZOOM SCROLL ──────────────────────────────
 (function() {
-  var vid = document.getElementById('heroVideo');
-  if (!vid) return;
-  var ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        var scrollY = window.pageYOffset;
-        var heroH = document.querySelector('.hero').offsetHeight;
-        if (scrollY < heroH) {
-          vid.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
+  var heroVid = document.getElementById('heroVideo');
+  var sectionsVid = document.getElementById('sectionsVideo');
+  var bottomVid = document.querySelector('.bottom-video video');
+  var hero = document.querySelector('.hero');
+
+  // Scroll-reveal elements
+  var reveals = document.querySelectorAll(
+    '.section-header, .price-card, .extra-card, .testimonial-card, ' +
+    '.benefit-card, .faq-item, .discount-card, .contact-info, .contact-form-card, ' +
+    '.gbusiness-bar, .referral-section'
+  );
+  reveals.forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px) scale(0.97)';
+    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
   });
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var scrollY = window.pageYOffset;
+      var winH = window.innerHeight;
+      var docH = document.body.scrollHeight - winH;
+      var progress = Math.min(scrollY / docH, 1);
+
+      // Hero video: parallax + zoom
+      if (heroVid && hero) {
+        var heroH = hero.offsetHeight;
+        if (scrollY < heroH) {
+          var p = scrollY / heroH;
+          var zoom = 1 + p * 0.15;
+          heroVid.style.transform = 'translateY(' + (scrollY * 0.35) + 'px) scale(' + zoom + ')';
+        }
+      }
+
+      // Sections video: parallax + zoom
+      if (sectionsVid) {
+        var parent = sectionsVid.closest('main');
+        if (parent) {
+          var rect = parent.getBoundingClientRect();
+          if (rect.top < winH && rect.bottom > 0) {
+            var p = Math.max(0, -rect.top / rect.height);
+            var zoom = 1 + p * 0.12;
+            sectionsVid.style.transform = 'translateY(' + (p * rect.height * 0.2) + 'px) scale(' + zoom + ')';
+          }
+        }
+      }
+
+      // Bottom video: parallax + zoom (keep scaleX flip)
+      if (bottomVid) {
+        var parent = bottomVid.closest('.bottom-video-wrap');
+        if (parent) {
+          var rect = parent.getBoundingClientRect();
+          if (rect.top < winH && rect.bottom > 0) {
+            var p = Math.max(0, -rect.top / rect.height);
+            var zoom = 1 + p * 0.12;
+            bottomVid.style.transform = 'scaleX(-1) translateY(' + (p * rect.height * 0.15) + 'px) scale(' + zoom + ')';
+          }
+        }
+      }
+
+      // Reveal elements with zoom-in
+      reveals.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top < winH * 0.88) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0) scale(1)';
+        }
+      });
+
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, {passive: true});
+  onScroll();
 })();
 
 // ─── CHATBOT ─────────────────────────────────────────────

@@ -2242,6 +2242,31 @@ main > *:not(.sections-video) {
   z-index: 2;
 }
 
+/* ─── SECTION DIVIDERS ─── */
+.section-divider {
+  height: 1px;
+  margin: 0 auto;
+  max-width: 200px;
+  background: linear-gradient(90deg, transparent, rgba(139,175,154,0.35), transparent);
+  position: relative;
+  z-index: 2;
+}
+.section-divider::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: var(--sage);
+  background: var(--mist);
+  padding: 0 12px;
+  opacity: 0.5;
+}
+.bottom-video-wrap .section-divider::before {
+  background: transparent;
+}
+
 /* ─── BOTTOM SECTIONS VIDEO BG ─── */
 .bottom-video-wrap {
   position: relative;
@@ -3044,6 +3069,8 @@ main > *:not(.sections-video) {
     </div>
   </div>
 
+  <div class="section-divider"></div>
+
   <!-- ── ONE-TIME CLEANING ── -->
   <div class="container">
     <div class="section-header">
@@ -3107,6 +3134,8 @@ main > *:not(.sections-video) {
       </div>
     </div>
   </div>
+
+  <div class="section-divider"></div>
 
   <!-- ── EXTRAS ── -->
   <div class="container extras-section">
@@ -3187,6 +3216,8 @@ main > *:not(.sections-video) {
 
 </main>
 
+<div class="section-divider"></div>
+
 <!-- ─── BENEFITS ─── -->
 <section class="benefits-section">
   <div class="container">
@@ -3251,6 +3282,8 @@ main > *:not(.sections-video) {
     </video>
     <div class="bottom-video-overlay"></div>
   </div>
+
+<div class="section-divider"></div>
 
 <!-- ─── TESTIMONIALS ─── -->
 <section class="testimonials-section">
@@ -3332,6 +3365,8 @@ main > *:not(.sections-video) {
 
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- ─── FAQ ─── -->
 <section class="faq-section">
@@ -3450,6 +3485,8 @@ main > *:not(.sections-video) {
   </div>
 </section>
 
+<div class="section-divider"></div>
+
 <!-- ─── DISCOUNTS ─── -->
 <section class="discounts-section">
   <div class="container">
@@ -3461,6 +3498,8 @@ main > *:not(.sections-video) {
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- ─── CONTACT ─── -->
 <section class="contact-section" id="contacto">

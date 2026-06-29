@@ -2314,6 +2314,40 @@ main > *:not(.sections-video) {
   border-radius: 50%;
 }
 
+/* ─── COOKIE BANNER ─── */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  color: rgba(255,255,255,0.85);
+  padding: 16px 24px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 9999;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.cookie-banner.show { display: flex; }
+.cookie-banner a { color: var(--sage-pale); text-decoration: underline; }
+.cookie-btn {
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+.cookie-btn--accept { background: var(--sage); color: white; }
+.cookie-btn--reject { background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2); }
+.cookie-btn--accept:hover { background: #6a9a7d; }
+.cookie-btn--reject:hover { color: white; }
+
 /* ─── BOTTOM SECTIONS VIDEO BG ─── */
 .bottom-video-wrap {
   position: relative;
@@ -3697,8 +3731,16 @@ main > *:not(.sections-video) {
     <span class="footer-tag">Mascotas bienvenidas</span>
     <span class="footer-tag">Referencias disponibles</span>
     <a href="#contacto" class="footer-tag" style="text-decoration:none; color:var(--sage); opacity:1; font-weight:600">→ Contactar</a>
+    <a href="datenschutz.html" class="footer-tag" style="text-decoration:none; opacity:0.6">Datenschutz</a>
   </div>
 </footer>
+
+<!-- ─── COOKIE BANNER ─── -->
+<div class="cookie-banner" id="cookieBanner">
+  <span id="cookieText">Utilizamos cookies para analizar el tráfico del sitio. <a href="datenschutz.html">Más información</a></span>
+  <button class="cookie-btn cookie-btn--accept" onclick="acceptCookies()">Aceptar</button>
+  <button class="cookie-btn cookie-btn--reject" onclick="rejectCookies()">Rechazar</button>
+</div>
 
 <!-- ─── CART FAB ─── -->
 <button class="cart-fab" id="cartFab" onclick="openCart()">
@@ -5470,6 +5512,38 @@ setInterval(function() {
   if (!upsellDismissed.proof && Math.random() < 0.6) showUpsellProof();
 }, 25000);
 setTimeout(function() { showUpsellProof(); }, 35000);
+
+// ─── COOKIE CONSENT ──────────────────────────────────────
+var COOKIE_TEXT = {
+  es: 'Utilizamos cookies para analizar el tráfico del sitio.',
+  de: 'Wir verwenden Cookies zur Analyse des Website-Verkehrs.',
+  en: 'We use cookies to analyse site traffic.',
+  fr: 'Nous utilisons des cookies pour analyser le trafic du site.',
+  it: 'Utilizziamo i cookie per analizzare il traffico del sito.',
+};
+(function() {
+  var consent = localStorage.getItem('jl_cookie_consent');
+  if (consent === 'accepted') return;
+  if (consent === 'rejected') {
+    window['ga-disable-G-VJ8X8YRZ3J'] = true;
+    return;
+  }
+  setTimeout(function() {
+    var txt = COOKIE_TEXT[currentLang] || COOKIE_TEXT.es;
+    var el = document.getElementById('cookieText');
+    if (el) el.innerHTML = txt + ' <a href="datenschutz.html" style="color:var(--sage-pale);text-decoration:underline">Datenschutz</a>';
+    document.getElementById('cookieBanner').classList.add('show');
+  }, 2000);
+})();
+function acceptCookies() {
+  localStorage.setItem('jl_cookie_consent', 'accepted');
+  document.getElementById('cookieBanner').classList.remove('show');
+}
+function rejectCookies() {
+  localStorage.setItem('jl_cookie_consent', 'rejected');
+  window['ga-disable-G-VJ8X8YRZ3J'] = true;
+  document.getElementById('cookieBanner').classList.remove('show');
+}
 
 // ─── PARALLAX + ZOOM SCROLL ──────────────────────────────
 (function() {

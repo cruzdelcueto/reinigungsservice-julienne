@@ -2244,27 +2244,38 @@ main > *:not(.sections-video) {
 
 /* ─── SECTION DIVIDERS ─── */
 .section-divider {
-  height: 1px;
-  margin: 0 auto;
-  max-width: 200px;
-  background: linear-gradient(90deg, transparent, rgba(139,175,154,0.35), transparent);
+  height: 40px;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 .section-divider::before {
-  content: '✦';
+  content: '';
   position: absolute;
+  left: 5%;
+  right: 5%;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 10px;
-  color: var(--sage);
-  background: var(--mist);
-  padding: 0 12px;
-  opacity: 0.5;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(139,175,154,0.15) 15%,
+    rgba(139,175,154,0.3) 50%,
+    rgba(139,175,154,0.15) 85%,
+    transparent 100%
+  );
 }
-.bottom-video-wrap .section-divider::before {
-  background: transparent;
+.section-divider::after {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: calc(50% + 1px);
+  height: 8px;
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0.03) 0%,
+    transparent 100%
+  );
+  border-radius: 50%;
 }
 
 /* ─── BOTTOM SECTIONS VIDEO BG ─── */

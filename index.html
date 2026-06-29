@@ -3890,13 +3890,27 @@ function showAbandonPopup() {
   var overlay = document.createElement('div');
   overlay.id = 'abandonOverlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;display:flex;align-items:center;justify-content:center;font-family:Outfit,sans-serif;';
-  overlay.innerHTML = '<div style="background:white;border-radius:20px;padding:32px;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2);margin:20px">' +
-    '<div style="font-size:32px;margin-bottom:12px">🧹</div>' +
+
+  var card = document.createElement('div');
+  card.style.cssText = 'background:white;border-radius:20px;padding:32px;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2);margin:20px';
+
+  var btnStay = document.createElement('button');
+  btnStay.textContent = m.stay;
+  btnStay.style.cssText = 'display:block;width:100%;padding:12px;background:#8BAF9A;color:white;border:none;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;margin-bottom:8px';
+  btnStay.addEventListener('click', function() { overlay.remove(); openCart(); });
+
+  var btnGo = document.createElement('button');
+  btnGo.textContent = m.go;
+  btnGo.style.cssText = 'display:block;width:100%;padding:10px;background:transparent;color:#3D3D3D;border:none;font-size:12px;cursor:pointer;font-family:Outfit,sans-serif;opacity:0.6';
+  btnGo.addEventListener('click', function() { overlay.remove(); });
+
+  card.innerHTML = '<div style="font-size:32px;margin-bottom:12px">🧹</div>' +
     '<h3 style="font-size:18px;margin-bottom:8px;color:#1A1A1A">' + m.title + '</h3>' +
-    '<p style="font-size:13px;color:#3D3D3D;line-height:1.5;margin-bottom:20px">' + m.text + '</p>' +
-    '<button onclick="document.getElementById(\'abandonOverlay\').remove();openCart()" style="display:block;width:100%;padding:12px;background:#8BAF9A;color:white;border:none;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;font-family:Outfit,sans-serif;margin-bottom:8px">' + m.stay + '</button>' +
-    '<button onclick="document.getElementById(\'abandonOverlay\').remove()" style="display:block;width:100%;padding:10px;background:transparent;color:#3D3D3D;border:none;font-size:12px;cursor:pointer;font-family:Outfit,sans-serif;opacity:0.6">' + m.go + '</button>' +
-    '</div>';
+    '<p style="font-size:13px;color:#3D3D3D;line-height:1.5;margin-bottom:20px">' + m.text + '</p>';
+  card.appendChild(btnStay);
+  card.appendChild(btnGo);
+  overlay.appendChild(card);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
   document.body.appendChild(overlay);
 }
 

@@ -783,35 +783,40 @@ main {
   align-items: center;
 }
 
-/* ─── AMBIENT WATER DROPLETS ─── */
-.droplets {
+/* ─── AMBIENT WATER SPRAY ─── */
+.water-spray {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden;
 }
 
-.droplets span {
+.water-spray-group {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spraySweep 8s ease-in-out infinite;
+}
+
+.water-spray-group span {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(196,236,222,0.35) 55%, transparent 75%);
-  box-shadow: 0 0 6px rgba(255,255,255,0.25);
-  opacity: 0;
-  animation-name: dropletDrift;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(196,236,222,0.3) 55%, transparent 75%);
+  filter: blur(2.5px);
 }
 
-@keyframes dropletDrift {
-  0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
+@keyframes spraySweep {
+  0%   { transform: translateX(-100%); opacity: 0; }
   12%  { opacity: 0.7; }
-  50%  { transform: translate(var(--dx, 6px), 22px) scale(1); opacity: 0.45; }
-  88%  { opacity: 0.15; }
-  100% { transform: translate(calc(var(--dx, 6px) * 2), 46px) scale(0.7); opacity: 0; }
+  50%  { opacity: 0.55; }
+  88%  { opacity: 0; }
+  100% { transform: translateX(100%); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .droplets span { animation: none; opacity: 0.25; }
+  .water-spray-group { animation: none; opacity: 0; }
 }
 
 .benefits-left .pre-label {
@@ -3192,21 +3197,24 @@ main > *:not(.sections-video) {
 
 <!-- ─── BENEFITS ─── -->
 <section class="benefits-section">
-  <div class="droplets" aria-hidden="true">
-    <span style="left:6%;  top:8%;  width:5px; height:5px; animation-duration:9s;  animation-delay:0s;   --dx:8px;"></span>
-    <span style="left:15%; top:60%; width:3px; height:3px; animation-duration:7s;  animation-delay:1.2s; --dx:-6px;"></span>
-    <span style="left:24%; top:25%; width:6px; height:6px; animation-duration:11s; animation-delay:2.5s; --dx:5px;"></span>
-    <span style="left:33%; top:75%; width:4px; height:4px; animation-duration:8s;  animation-delay:0.6s; --dx:-4px;"></span>
-    <span style="left:41%; top:15%; width:3px; height:3px; animation-duration:10s; animation-delay:3.4s; --dx:7px;"></span>
-    <span style="left:52%; top:50%; width:5px; height:5px; animation-duration:9.5s;animation-delay:1.8s; --dx:-8px;"></span>
-    <span style="left:61%; top:32%; width:4px; height:4px; animation-duration:7.5s;animation-delay:2.1s; --dx:6px;"></span>
-    <span style="left:69%; top:68%; width:6px; height:6px; animation-duration:12s; animation-delay:0.3s; --dx:-5px;"></span>
-    <span style="left:77%; top:12%; width:3px; height:3px; animation-duration:8.5s;animation-delay:4s;   --dx:4px;"></span>
-    <span style="left:85%; top:55%; width:5px; height:5px; animation-duration:10.5s;animation-delay:2.8s;--dx:-7px;"></span>
-    <span style="left:91%; top:22%; width:4px; height:4px; animation-duration:9s;  animation-delay:1.5s; --dx:6px;"></span>
-    <span style="left:48%; top:85%; width:3px; height:3px; animation-duration:7s;  animation-delay:3.7s; --dx:-4px;"></span>
-    <span style="left:12%; top:38%; width:4px; height:4px; animation-duration:11.5s;animation-delay:0.9s;--dx:5px;"></span>
-    <span style="left:96%; top:80%; width:3px; height:3px; animation-duration:8s;  animation-delay:2.3s; --dx:-6px;"></span>
+  <div class="water-spray" aria-hidden="true">
+    <div class="water-spray-group">
+      <span style="left:2%;  top:4%;  width:5px; height:5px;"></span>
+      <span style="left:6%;  top:14%; width:3px; height:3px;"></span>
+      <span style="left:1%;  top:22%; width:6px; height:6px;"></span>
+      <span style="left:8%;  top:30%; width:4px; height:4px;"></span>
+      <span style="left:3%;  top:38%; width:3px; height:3px;"></span>
+      <span style="left:10%; top:46%; width:5px; height:5px;"></span>
+      <span style="left:4%;  top:54%; width:4px; height:4px;"></span>
+      <span style="left:0%;  top:62%; width:6px; height:6px;"></span>
+      <span style="left:7%;  top:70%; width:3px; height:3px;"></span>
+      <span style="left:2%;  top:78%; width:5px; height:5px;"></span>
+      <span style="left:9%;  top:86%; width:4px; height:4px;"></span>
+      <span style="left:5%;  top:94%; width:3px; height:3px;"></span>
+      <span style="left:13%; top:10%; width:3px; height:3px;"></span>
+      <span style="left:15%; top:50%; width:4px; height:4px;"></span>
+      <span style="left:14%; top:88%; width:3px; height:3px;"></span>
+    </div>
   </div>
   <div class="container">
     <div class="benefits-left">

@@ -3792,15 +3792,16 @@ function renderCart() {
   emptyEl.style.display = 'none';
   footer.style.display  = 'block';
 
+  const tt = TRANSLATIONS[currentLang] || TRANSLATIONS.es;
   const mains  = cart.filter(i => i.isMain);
   const extras = cart.filter(i => !i.isMain);
   let html = '';
   if (mains.length) {
-    html += '<div class="cart-section-label">Servicio principal</div>';
+    html += '<div class="cart-section-label">' + (tt.cart_main_service || 'Servicio principal') + '</div>';
     mains.forEach(i => html += itemHTML(i));
   }
   if (extras.length) {
-    html += '<div class="cart-section-label">Servicios adicionales</div>';
+    html += '<div class="cart-section-label">' + (tt.cart_extras || 'Servicios adicionales') + '</div>';
     extras.forEach(i => html += itemHTML(i));
   }
   body.innerHTML = html;
@@ -3808,7 +3809,8 @@ function renderCart() {
 
   const total    = cart.reduce((s, i) => s + i.price, 0);
 
-  document.getElementById('cartTotal').textContent = total > 0 ? 'CHF ' + total : 'A consultar';
+  const consultLabel = (MSG[currentLang] || MSG.es).consult;
+  document.getElementById('cartTotal').textContent = total > 0 ? 'CHF ' + total : (consultLabel.charAt(0).toUpperCase() + consultLabel.slice(1));
 
   renderCalendar();
   updateLinks();
@@ -4059,7 +4061,7 @@ const TRANSLATIONS = {
       { tag: '🏠 Estudio / 1 hab.', size: 'Piso<br>pequeño', rooms: 'aprox. 2 horas', unit: 'CHF / visita', rate: 'CHF 45 / hora · estimado', features: ['Cocina, baño, salón','Aspirado y fregado','Sanitarios'], btn: '+ Añadir al presupuesto' },
       { tag: '🏡 2 – 3 hab.', size: 'Piso<br>mediano', rooms: 'aprox. 3 horas', unit: 'CHF / visita', rate: 'CHF 45 / hora · estimado', features: ['Todas las habitaciones','Cocina y baño a fondo','Espejos y superficies'], btn: '+ Añadir al presupuesto' },
       { tag: '🏘️ 4 – 5 hab.', size: 'Piso<br>grande', rooms: 'aprox. 4.5 horas', unit: 'CHF / visita', rate: 'CHF 45 / hora · estimado', features: ['Varios baños posible','Escaleras y pasillos','Trastero bajo consulta'], btn: '+ Añadir al presupuesto' },
-      { tag: '🏰 6+ hab. / Casa', size: 'Casa<br>grande', rooms: '6+ horas · individual', unit: 'tras visita previa', rate: 'CHF 45 / hora · precio base', features: ['Visita gratuita','Trabajo en equipo disponible','Presupuesto personalizado'] },
+      { tag: '🏰 6+ hab. / Casa', size: 'Casa<br>grande', rooms: '6+ horas · individual', unit: 'tras visita previa', rate: 'CHF 45 / hora · precio base', price_text: 'A consultar', features: ['Visita gratuita','Trabajo en equipo disponible','Presupuesto personalizado'], btn: 'Consultar precio →' },
     ],
     onetime_cards: [
       { tag: '🏠 Estudio / 1 hab.', size: 'Limpieza<br>puntual', rooms: 'aprox. 3 horas', unit: 'CHF / visita', rate: 'CHF 55 / hora · estimado', features: ['Limpieza profunda baño y WC','Cocina y horno incluidos'], btn: '+ Añadir al presupuesto' },
@@ -4073,14 +4075,14 @@ const TRANSLATIONS = {
       { tag: '📦 Mudanza / Entrega de llaves', size: 'Limpieza<br>mudanza', rooms: 'Antes de entregar o al recibir las llaves', unit: 'tras visita o fotos', rate: 'Sujeto a valoración previa', price_text: 'Precio fijo', features: ['Armarios, cajones y estanterías vacíos','Cocina y electrodomésticos a fondo','Baños, azulejos y sanitarios','Suelos, rodapiés y cristales'], btn: 'Consultar precio →' },
     ],
     extras: [
-      { name: 'Mascotas (perro/gato)', desc: 'Mayor esfuerzo por pelos, desinfección y olores' },
-      { name: 'Limpieza de ventanas', desc: 'Por dentro o por ambos lados — precio según cantidad y tamaño' },
+      { name: 'Mascotas (perro/gato)', desc: 'Mayor esfuerzo por pelos, desinfección y olores', price: 'A <span>consultar</span>' },
+      { name: 'Limpieza de ventanas', desc: 'Por dentro o por ambos lados — precio según cantidad y tamaño', price: 'A <span>consultar</span>' },
       { name: 'Limpieza profunda del horno', desc: 'aprox. 45 min. — incl. rejillas y desengrasado' },
       { name: 'Interior del frigorífico', desc: 'aprox. 30 min. — vaciar, limpiar y recolocar' },
       { name: 'Eliminación de cal / Baño plus', desc: 'aprox. 30–45 min. — cal intensa, pulido de grifos' },
       { name: 'Aspirado de tapicería', desc: 'aprox. 20 min. — sofá, sillones, sillas' },
       { name: 'Lavar y doblar ropa', desc: 'aprox. 30 min. activo — una lavadora incl. secadora' },
-      { name: 'Limpieza post-obra', desc: 'Polvo, restos de pintura, yeso — muy laborioso, individual' },
+      { name: 'Limpieza post-obra', desc: 'Polvo, restos de pintura, yeso — muy laborioso, individual', price: 'A <span>consultar</span>' },
       { name: 'Limpieza de terraza', desc: 'aprox. 45 min. — barrer, muebles, barandillas' },
     ],
     benefits_cards: [
@@ -4161,7 +4163,7 @@ const TRANSLATIONS = {
       {tag:'🏠 Studio / 1.5-Zi.',size:'Kleine<br>Wohnung',rooms:'ca. 2 Std.',unit:'CHF / Einsatz',rate:'CHF 45 / Std. · geschätzt',features:['Küche, Bad, Wohnraum','Staubsaugen & Wischen','Sanitäranlagen'],btn:'+ Zum Angebot'},
       {tag:'🏡 2 – 3 Zi.',size:'Mittlere<br>Wohnung',rooms:'ca. 3 Std.',unit:'CHF / Einsatz',rate:'CHF 45 / Std. · geschätzt',features:['Alle Zimmer inklusive','Küche & Bad gründlich','Spiegel & Oberflächen'],btn:'+ Zum Angebot'},
       {tag:'🏘️ 4 – 5 Zi.',size:'Grosse<br>Wohnung',rooms:'ca. 4.5 Std.',unit:'CHF / Einsatz',rate:'CHF 45 / Std. · geschätzt',features:['Mehrere Bäder möglich','Treppen & Flure','Keller auf Anfrage'],btn:'+ Zum Angebot'},
-      {tag:'🏰 6+ Zi. / Haus',size:'Grosses<br>Haus',rooms:'6+ Std. · individuell',unit:'nach Besichtigung',rate:'CHF 45 / Std. · Grundpreis',features:['Kostenlose Besichtigung','Team-Einsatz verfügbar','Individuelles Angebot']},
+      {tag:'🏰 6+ Zi. / Haus',size:'Grosses<br>Haus',rooms:'6+ Std. · individuell',unit:'nach Besichtigung',rate:'CHF 45 / Std. · Grundpreis',price_text:'Auf Anfrage',features:['Kostenlose Besichtigung','Team-Einsatz verfügbar','Individuelles Angebot'],btn:'Preis anfragen →'},
     ],
     onetime_cards: [
       {tag:'🏠 Studio / 1.5-Zi.',size:'Einmal-<br>reinigung',rooms:'ca. 3 Std.',unit:'CHF / Einsatz',rate:'CHF 55 / Std. · geschätzt',features:['Tiefenreinigung Bad & WC','Herd & Backofen inklusive'],btn:'+ Zum Angebot'},
@@ -4175,14 +4177,14 @@ const TRANSLATIONS = {
       {tag:'📦 Umzug / Schlüsselübergabe',size:'Umzugs-<br>reinigung',rooms:'Vor Übergabe oder bei Schlüsselerhalt',unit:'nach Besichtigung oder Fotos',rate:'Nach vorheriger Einschätzung',price_text:'Festpreis',features:['Schränke, Schubladen und Regale geleert','Küche und Geräte gründlich gereinigt','Bäder, Fliesen und Sanitäranlagen','Böden, Sockelleisten und Fenster'],btn:'Preis anfragen →'},
     ],
     extras: [
-      {name:'Haustiere (Hund/Katze)',desc:'Erhöhter Aufwand für Tierhaare, Desinfektion & Geruch'},
-      {name:'Fensterreinigung',desc:'Innen oder beidseitig — Preis nach Anzahl & Grösse'},
+      {name:'Haustiere (Hund/Katze)',desc:'Erhöhter Aufwand für Tierhaare, Desinfektion & Geruch',price:'Auf <span>Anfrage</span>'},
+      {name:'Fensterreinigung',desc:'Innen oder beidseitig — Preis nach Anzahl & Grösse',price:'Auf <span>Anfrage</span>'},
       {name:'Backofen Tiefenreinigung',desc:'ca. 45 Min. — inkl. Roste & Fettentfernung'},
       {name:'Kühlschrank innen',desc:'ca. 30 Min. — Ausräumen, reinigen, einräumen'},
       {name:'Kalkentfernung / Bad Plus',desc:'ca. 30–45 Min. — starker Kalk, Armaturenpolitur'},
       {name:'Polstermöbel absaugen',desc:'ca. 20 Min. — Sofa, Sessel, Stühle'},
       {name:'Wäsche waschen & falten',desc:'ca. 30 Min. aktiv — eine Maschine inkl. Trockner'},
-      {name:'Reinigung nach Renovation',desc:'Staub, Farbreste, Gips — sehr aufwendig, individuell'},
+      {name:'Reinigung nach Renovation',desc:'Staub, Farbreste, Gips — sehr aufwendig, individuell',price:'Auf <span>Anfrage</span>'},
       {name:'Terrassenreinigung',desc:'ca. 45 Min. — Fegen, Möbel, Geländer'},
     ],
     benefits_cards: [
@@ -4255,7 +4257,7 @@ const TRANSLATIONS = {
       {tag:'🏠 Studio / 1 bed',size:'Small<br>flat',rooms:'approx. 2 hours',unit:'CHF / visit',rate:'CHF 45 / hr · estimated',features:['Kitchen, bathroom, living room','Vacuuming & mopping','Sanitaryware'],btn:'+ Add to quote'},
       {tag:'🏡 2 – 3 bed',size:'Medium<br>flat',rooms:'approx. 3 hours',unit:'CHF / visit',rate:'CHF 45 / hr · estimated',features:['All rooms included','Kitchen & bathroom thorough','Mirrors & surfaces'],btn:'+ Add to quote'},
       {tag:'🏘️ 4 – 5 bed',size:'Large<br>flat',rooms:'approx. 4.5 hours',unit:'CHF / visit',rate:'CHF 45 / hr · estimated',features:['Multiple bathrooms possible','Stairs & hallways','Storage on request'],btn:'+ Add to quote'},
-      {tag:'🏰 6+ bed / House',size:'Large<br>house',rooms:'6+ hours · individual',unit:'after visit',rate:'CHF 45 / hr · base rate',features:['Free visit','Team available','Personalised quote']},
+      {tag:'🏰 6+ bed / House',size:'Large<br>house',rooms:'6+ hours · individual',unit:'after visit',rate:'CHF 45 / hr · base rate',price_text:'On request',features:['Free visit','Team available','Personalised quote'],btn:'Enquire →'},
     ],
     onetime_cards: [
       {tag:'🏠 Studio / 1 bed',size:'One-time<br>clean',rooms:'approx. 3 hours',unit:'CHF / visit',rate:'CHF 55 / hr · estimated',features:['Deep clean bathroom & WC','Kitchen & oven included'],btn:'+ Add to quote'},
@@ -4269,14 +4271,14 @@ const TRANSLATIONS = {
       {tag:'📦 Move-out / Key handover',size:'Move-out<br>cleaning',rooms:'Before handover or when receiving the keys',unit:'after a visit or photos',rate:'Subject to prior assessment',price_text:'Fixed price',features:['Wardrobes, drawers and shelves emptied','Kitchen and appliances deep-cleaned','Bathrooms, tiles and fixtures','Floors, skirting boards and windows'],btn:'Request a quote →'},
     ],
     extras: [
-      {name:'Pets (dog/cat)',desc:'Extra effort for hair, disinfection and odours'},
-      {name:'Window cleaning',desc:'Inside or both sides — price by quantity and size'},
+      {name:'Pets (dog/cat)',desc:'Extra effort for hair, disinfection and odours',price:'On <span>request</span>'},
+      {name:'Window cleaning',desc:'Inside or both sides — price by quantity and size',price:'On <span>request</span>'},
       {name:'Oven deep clean',desc:'approx. 45 min. — incl. racks and degreasing'},
       {name:'Inside of fridge',desc:'approx. 30 min. — empty, clean, restock'},
       {name:'Limescale removal / Bathroom plus',desc:'approx. 30–45 min. — heavy scale, tap polishing'},
       {name:'Upholstery vacuuming',desc:'approx. 20 min. — sofa, armchairs, chairs'},
       {name:'Laundry wash & fold',desc:'approx. 30 min. active — one machine incl. dryer'},
-      {name:'Post-renovation cleaning',desc:'Dust, paint residue, plaster — very intensive, individual'},
+      {name:'Post-renovation cleaning',desc:'Dust, paint residue, plaster — very intensive, individual',price:'On <span>request</span>'},
       {name:'Terrace cleaning',desc:'approx. 45 min. — sweeping, furniture, railings'},
     ],
     benefits_cards: [
@@ -4349,7 +4351,7 @@ const TRANSLATIONS = {
       {tag:'🏠 Studio / 1 ch.',size:'Petit<br>appartement',rooms:'env. 2 heures',unit:'CHF / visite',rate:'CHF 45 / h · estimé',features:['Cuisine, salle de bain, salon','Aspiration & lavage','Sanitaires'],btn:'+ Ajouter au devis'},
       {tag:'🏡 2 – 3 ch.',size:'Appartement<br>moyen',rooms:'env. 3 heures',unit:'CHF / visite',rate:'CHF 45 / h · estimé',features:['Toutes les pièces incluses','Cuisine & salle de bain en profondeur','Miroirs & surfaces'],btn:'+ Ajouter au devis'},
       {tag:'🏘️ 4 – 5 ch.',size:'Grand<br>appartement',rooms:'env. 4.5 heures',unit:'CHF / visite',rate:'CHF 45 / h · estimé',features:['Plusieurs salles de bain possible','Escaliers & couloirs','Cave sur demande'],btn:'+ Ajouter au devis'},
-      {tag:'🏰 6+ ch. / Maison',size:'Grande<br>maison',rooms:'6+ h · individuel',unit:'après visite',rate:'CHF 45 / h · tarif de base',features:['Visite gratuite','Équipe disponible','Devis personnalisé']},
+      {tag:'🏰 6+ ch. / Maison',size:'Grande<br>maison',rooms:'6+ h · individuel',unit:'après visite',rate:'CHF 45 / h · tarif de base',price_text:'Sur demande',features:['Visite gratuite','Équipe disponible','Devis personnalisé'],btn:'Demander le prix →'},
     ],
     onetime_cards: [
       {tag:'🏠 Studio / 1 ch.',size:'Nettoyage<br>ponctuel',rooms:'env. 3 heures',unit:'CHF / visite',rate:'CHF 55 / h · estimé',features:['Nettoyage en profondeur salle de bain','Cuisine & four inclus'],btn:'+ Ajouter au devis'},
@@ -4363,14 +4365,14 @@ const TRANSLATIONS = {
       {tag:'📦 Déménagement / Remise des clés',size:'Nettoyage<br>déménagement',rooms:'Avant remise ou à la réception des clés',unit:'après visite ou photos',rate:'Sous réserve d\'évaluation préalable',price_text:'Prix fixe',features:['Armoires, tiroirs et étagères vides','Cuisine et électroménagers en profondeur','Salles de bain, carrelage et sanitaires','Sols, plinthes et vitres'],btn:'Demander un devis →'},
     ],
     extras: [
-      {name:'Animaux (chien/chat)',desc:'Effort supplémentaire pour les poils, désinfection et odeurs'},
-      {name:'Nettoyage des vitres',desc:'Intérieur ou des deux côtés — prix selon quantité et taille'},
+      {name:'Animaux (chien/chat)',desc:'Effort supplémentaire pour les poils, désinfection et odeurs',price:'Sur <span>demande</span>'},
+      {name:'Nettoyage des vitres',desc:'Intérieur ou des deux côtés — prix selon quantité et taille',price:'Sur <span>demande</span>'},
       {name:'Nettoyage en profondeur du four',desc:'env. 45 min. — grilles et dégraissage inclus'},
       {name:'Intérieur du réfrigérateur',desc:'env. 30 min. — vider, nettoyer, remettre en place'},
       {name:'Détartrage / Salle de bain plus',desc:'env. 30–45 min. — calcaire intense, lustrage des robinets'},
       {name:'Aspiration des meubles rembourrés',desc:'env. 20 min. — canapé, fauteuils, chaises'},
       {name:'Lessive & pliage',desc:'env. 30 min. actif — une machine incl. sèche-linge'},
-      {name:'Nettoyage après travaux',desc:'Poussière, restes de peinture, plâtre — très intensif, individuel'},
+      {name:'Nettoyage après travaux',desc:'Poussière, restes de peinture, plâtre — très intensif, individuel',price:'Sur <span>demande</span>'},
       {name:'Nettoyage de terrasse',desc:'env. 45 min. — balayage, mobilier, garde-corps'},
     ],
     benefits_cards: [
@@ -4443,7 +4445,7 @@ const TRANSLATIONS = {
       {tag:'🏠 Monolocale / 1 cam.',size:'Appartamento<br>piccolo',rooms:'circa 2 ore',unit:'CHF / visita',rate:'CHF 45 / ora · stimato',features:['Cucina, bagno, soggiorno','Aspirazione e lavaggio','Sanitari'],btn:'+ Aggiungi al preventivo'},
       {tag:'🏡 2 – 3 cam.',size:'Appartamento<br>medio',rooms:'circa 3 ore',unit:'CHF / visita',rate:'CHF 45 / ora · stimato',features:['Tutte le stanze incluse','Cucina e bagno a fondo','Specchi e superfici'],btn:'+ Aggiungi al preventivo'},
       {tag:'🏘️ 4 – 5 cam.',size:'Appartamento<br>grande',rooms:'circa 4.5 ore',unit:'CHF / visita',rate:'CHF 45 / ora · stimato',features:['Più bagni possibile','Scale e corridoi','Cantina su richiesta'],btn:'+ Aggiungi al preventivo'},
-      {tag:'🏰 6+ cam. / Casa',size:'Casa<br>grande',rooms:'6+ ore · individuale',unit:'dopo visita',rate:'CHF 45 / ora · tariffa base',features:['Visita gratuita','Lavoro in team disponibile','Preventivo personalizzato']},
+      {tag:'🏰 6+ cam. / Casa',size:'Casa<br>grande',rooms:'6+ ore · individuale',unit:'dopo visita',rate:'CHF 45 / ora · tariffa base',price_text:'Su richiesta',features:['Visita gratuita','Lavoro in team disponibile','Preventivo personalizzato'],btn:'Chiedi il prezzo →'},
     ],
     onetime_cards: [
       {tag:'🏠 Monolocale / 1 cam.',size:'Pulizia<br>una tantum',rooms:'circa 3 ore',unit:'CHF / visita',rate:'CHF 55 / ora · stimato',features:['Pulizia profonda bagno e WC','Cucina e forno inclusi'],btn:'+ Aggiungi al preventivo'},
@@ -4457,14 +4459,14 @@ const TRANSLATIONS = {
       {tag:'📦 Trasloco / Consegna chiavi',size:'Pulizia<br>trasloco',rooms:'Prima della consegna o al ritiro delle chiavi',unit:'dopo sopralluogo o foto',rate:'Soggetto a valutazione preventiva',price_text:'Prezzo fisso',features:['Armadi, cassetti e scaffali vuoti','Cucina ed elettrodomestici a fondo','Bagni, piastrelle e sanitari','Pavimenti, battiscopa e vetri'],btn:'Richiedi preventivo →'},
     ],
     extras: [
-      {name:'Animali (cane/gatto)',desc:'Maggiore sforzo per peli, disinfezione e odori'},
-      {name:'Pulizia finestre',desc:'Interno o entrambi i lati — prezzo in base a quantità e dimensione'},
+      {name:'Animali (cane/gatto)',desc:'Maggiore sforzo per peli, disinfezione e odori',price:'Su <span>richiesta</span>'},
+      {name:'Pulizia finestre',desc:'Interno o entrambi i lati — prezzo in base a quantità e dimensione',price:'Su <span>richiesta</span>'},
       {name:'Pulizia profonda forno',desc:'circa 45 min. — incl. griglie e sgrassatura'},
       {name:'Interno frigorifero',desc:'circa 30 min. — svuotare, pulire, rimettere a posto'},
       {name:'Eliminazione calcare / Bagno plus',desc:'circa 30–45 min. — calcare intenso, lucidatura rubinetti'},
       {name:'Aspirazione tappezzeria',desc:'circa 20 min. — divano, poltrone, sedie'},
       {name:'Lavare e piegare biancheria',desc:'circa 30 min. attivo — una lavatrice incl. asciugatrice'},
-      {name:'Pulizia post-ristrutturazione',desc:'Polvere, residui di vernice, gesso — molto laborioso, individuale'},
+      {name:'Pulizia post-ristrutturazione',desc:'Polvere, residui di vernice, gesso — molto laborioso, individuale',price:'Su <span>richiesta</span>'},
       {name:'Pulizia terrazza',desc:'circa 45 min. — spazzare, mobili, ringhiere'},
     ],
     benefits_cards: [
@@ -4747,6 +4749,7 @@ function setLang(lang) {
     const d = extraData[i];
     const name = card.querySelector('.extra-name'); if (name) name.textContent = d.name;
     const desc = card.querySelector('.extra-desc'); if (desc) desc.textContent = d.desc;
+    const price = card.querySelector('.extra-price'); if (price && d.price) price.innerHTML = d.price;
     const btn  = card.querySelector('.add-to-cart, .btn-consultar');
     if (btn) btn.textContent = btn.classList.contains('btn-consultar') ? t.btn_consultar : t.btn_add;
   });

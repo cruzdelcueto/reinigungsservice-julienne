@@ -376,9 +376,27 @@ nav {
 
 .hero-actions {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: 24px;
   animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.float-btn {
+  display: inline-flex;
+  animation: floatY 3.2s ease-in-out infinite;
+}
+
+.float-btn:nth-child(2) { animation-delay: 0.5s; }
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-btn { animation: none; }
 }
 
 .btn-primary {
@@ -2032,8 +2050,9 @@ footer strong {
   .nav-contact { display: none; }
   .hero-content { padding: 40px 20px 40px; }
   .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 12px;
   }
   .btn-primary {
@@ -2685,8 +2704,8 @@ main > *:not(.sections-video) {
     </p>
 
     <div class="hero-actions">
-      <a href="#contacto" class="btn-primary" data-i18n="hero_cta">Presupuesto gratuito</a>
-      <a href="tel:+41772622043" class="btn-link">📞 +41 77 262 20 43</a>
+      <div class="float-btn"><a href="#contacto" class="btn-primary" data-i18n="hero_cta">Presupuesto gratuito</a></div>
+      <div class="float-btn"><a href="tel:+41772622043" class="btn-link">📞 +41 77 262 20 43</a></div>
     </div>
   </div>
 

@@ -873,95 +873,6 @@ main {
   margin: 0;
 }
 
-/* ─── DISCOUNTS ─── */
-.discounts-section { padding: 80px 0; }
-
-.discounts-section .container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  max-width: 680px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.discount-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 56px 48px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-
-.discount-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 5px;
-}
-
-.discount-card.dc-sage::before { background: var(--sage); }
-.discount-card.dc-terra::before { background: var(--terracotta); }
-
-.discount-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 120px;
-  font-weight: 300;
-  color: var(--sage);
-  line-height: 1;
-  margin-bottom: 0;
-  opacity: 0.08;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 10px;
-  white-space: nowrap;
-}
-
-.discount-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 38px;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 1;
-  line-height: 1.15;
-}
-
-.discount-card p {
-  font-size: 15px;
-  color: var(--ink-soft);
-  line-height: 1.8;
-  font-weight: 300;
-  position: relative;
-  z-index: 1;
-  max-width: 440px;
-  margin: 0 auto;
-}
-
-.discount-chip {
-  display: inline-block;
-  background: var(--sage-pale);
-  color: #3d7060;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.discount-chip.orange {
-  background: var(--terracotta-pale);
-  color: var(--terracotta);
-}
-
 .cart-cta-secondary {
   background: transparent;
   color: var(--ink);
@@ -1715,42 +1626,6 @@ footer strong {
 
 
 
-/* ─── REFERRAL BANNER ─── */
-.ref-banner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, #e8f5ee 0%, #f0f9f4 100%);
-  border: 1.5px solid var(--sage);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  animation: fadeUp 0.3s ease both;
-}
-.ref-banner-icon { font-size: 22px; flex-shrink: 0; }
-.ref-banner-text { flex: 1; }
-.ref-banner-text strong {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #2d6050;
-  margin-bottom: 2px;
-}
-.ref-banner-text span {
-  font-size: 12px;
-  color: var(--sage);
-  font-weight: 400;
-}
-.ref-banner-badge {
-  background: var(--sage);
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 100px;
-  flex-shrink: 0;
-}
-
 /* ─── CART BUTTON ON CARDS ─── */
 .add-to-cart {
   display: flex;
@@ -2136,7 +2011,6 @@ footer strong {
   .price-grid-3 { grid-template-columns: 1fr 1fr; }
   .extras-grid { grid-template-columns: 1fr 1fr; }
   .benefits-section .container { grid-template-columns: 1fr; gap: 40px; }
-  .discounts-section .container { grid-template-columns: 1fr; }
   .section-header { flex-direction: column; gap: 12px; }
   .section-note { text-align: left; }
   footer { flex-direction: column; gap: 20px; text-align: center; }
@@ -2311,7 +2185,6 @@ main > *:not(.sections-video) {
 .bottom-video-wrap .testimonials-section,
 .bottom-video-wrap .benefits-section,
 .bottom-video-wrap .faq-section,
-.bottom-video-wrap .discounts-section,
 .bottom-video-wrap .contact-section {
   background: transparent;
 }
@@ -2819,10 +2692,6 @@ main > *:not(.sections-video) {
       <div class="stat-value">CHF 55</div>
       <div class="stat-label" data-i18n="stat2_label">/ hora limpieza puntual</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-value">–5%</div>
-      <div class="stat-label" data-i18n="stat3_label">Descuento por recomendación</div>
-    </div>
   </div>
 </section>
 
@@ -3103,7 +2972,7 @@ main > *:not(.sections-video) {
       <div class="special-icon">✨</div>
       <div class="special-content">
         <h3>Limpieza especial a CHF 55 / hora</h3>
-        <p>Las limpiezas puntuales (post-obra, renovación, limpieza profunda) requieren más esfuerzo porque la suciedad y la cal acumulada <strong>exigen mucho más tiempo y trabajo</strong>. Por eso el precio por hora es mayor.</p>
+        <p>Las limpiezas puntuales requieren más esfuerzo porque la suciedad y la cal acumulada <strong>exigen mucho más tiempo y trabajo</strong>. Por eso el precio por hora es mayor.</p>
       </div>
     </div>
 
@@ -3594,7 +3463,6 @@ main > *:not(.sections-video) {
             const name = document.getElementById('cf-name').value.trim();
             document.getElementById('contactFormCard').style.display = 'none';
             document.getElementById('contactSuccess').style.display  = 'block';
-            showGeneratedCoupon(name || 'Cliente');
           }
         });
       </script>
@@ -3665,23 +3533,9 @@ main > *:not(.sections-video) {
   </div>
 
   <div class="cart-footer" id="cartFooter" style="display:none">
-    <!-- Referral banner (hidden by default, shown when ?ref= detected) -->
-    <div class="ref-banner" id="refBanner" style="display:none">
-      <div class="ref-banner-icon">🎁</div>
-      <div class="ref-banner-text">
-        <strong id="refBannerTitle">Descuento de referido aplicado</strong>
-        <span id="refBannerSub">–5% en tu primera reserva</span>
-      </div>
-      <div class="ref-banner-badge">–5%</div>
-    </div>
-
     <div class="cart-total-row">
       <span class="cart-total-label">Total estimado</span>
       <span class="cart-total-amount" id="cartTotal">CHF 0</span>
-    </div>
-    <div class="cart-total-row" id="discountRow" style="display:none">
-      <span class="cart-total-label" style="color:var(--sage)">Descuento referido (–5%)</span>
-      <span style="font-size:16px;font-weight:600;color:var(--sage)" id="discountAmt"></span>
     </div>
     <p class="cart-total-note">* Los servicios "a consultar" no están incluidos en el total. El precio final se confirma tras hablar con Julienne.</p>
 
@@ -3730,57 +3584,6 @@ main > *:not(.sections-video) {
 </div>
 
 <script>
-// ─── CUPÓN SYSTEM ─────────────────────────────────────────
-// Cupones válidos — se añaden automáticamente cuando alguien compra
-// Formato: 'CODIGO': { name: 'Nombre', used: false }
-// Los 3 clientes iniciales ya tienen cupón activo
-const COUPONS = {
-  'VICKY-REF':   { name: 'Vicky W.',   used: false },
-  'NICOLE-REF':  { name: 'Nicole M.',  used: false },
-  'ILEANA-REF':  { name: 'Ileana M. del Cueto',  used: false },
-};
-
-let activeRefCode = null;
-let activeRefName = null;
-let discountPct   = 0;
-let generatedCoupon = null; // cupón generado para el cliente actual
-
-// Genera un código único a partir del nombre
-function generateCouponCode(name) {
-  const clean = name.toUpperCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quitar tildes
-    .replace(/[^A-Z0-9]/g, '')
-    .substring(0, 7);
-  return clean + '-REF';
-}
-
-// Detectar ?ref= o ?cupon= en la URL al cargar
-function detectReferral() {
-  const params = new URLSearchParams(window.location.search);
-  const code   = (params.get('ref') || params.get('cupon') || '').toUpperCase().trim();
-  if (!code) return;
-  const coupon = COUPONS[code];
-  if (!coupon) return;
-  activeRefCode = code;
-  activeRefName = coupon.name;
-  discountPct   = 5;
-  const banner = document.getElementById('refBanner');
-  if (banner) {
-    document.getElementById('refBannerTitle').textContent = '¡Descuento de referido aplicado!';
-    document.getElementById('refBannerSub').textContent   = 'Cupón de ' + coupon.name + ' · –5% en esta reserva';
-    banner.style.display = 'flex';
-  }
-  showRefToast(coupon.name);
-}
-
-function showRefToast(name) {
-  const toast = document.createElement('div');
-  toast.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:#1A1A1A;color:white;padding:14px 24px;border-radius:100px;font-size:14px;font-weight:500;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.25);display:flex;align-items:center;gap:10px;font-family:Outfit,sans-serif;white-space:nowrap;';
-  toast.innerHTML = '🎁 <span>–5% aplicado gracias al cupón de <strong>' + name + '</strong></span>';
-  document.body.appendChild(toast);
-  setTimeout(function() { toast.style.opacity='0'; toast.style.transition='opacity 0.5s'; setTimeout(function(){ toast.remove(); }, 500); }, 5000);
-}
-
 
 
 // ─── PAYMENT METHODS (Stripe removed) ─────────────────────
@@ -3954,20 +3757,8 @@ function renderCart() {
   body.appendChild(emptyEl);
 
   const total    = cart.reduce((s, i) => s + i.price, 0);
-  const discount = discountPct > 0 ? Math.round(total * discountPct / 100) : 0;
-  const finalTotal = total - discount;
 
   document.getElementById('cartTotal').textContent = total > 0 ? 'CHF ' + total : 'A consultar';
-  const discRow = document.getElementById('discountRow');
-  const discAmt = document.getElementById('discountAmt');
-  if (discRow && discAmt) {
-    if (discount > 0 && total > 0) {
-      discAmt.textContent = '–CHF ' + discount + ' → CHF ' + finalTotal;
-      discRow.style.display = 'flex';
-    } else {
-      discRow.style.display = 'none';
-    }
-  }
 
   renderCalendar();
   updateLinks();
@@ -4115,8 +3906,6 @@ function clearDateTime() {
 function updateLinks() {
   const m = MSG[currentLang] || MSG.es;
   const total      = cart.reduce((s, i) => s + i.price, 0);
-  const discount   = discountPct > 0 ? Math.round(total * discountPct / 100) : 0;
-  const finalTotal = total - discount;
   const hasConsult = cart.some(i => i.price === 0);
 
   const summary = cart.map(i => '• ' + i.name + ' (' + i.sub + ')' + (i.price > 0 ? ' — CHF ' + i.price : ' — ' + m.consult)).join('\n');
@@ -4124,18 +3913,15 @@ function updateLinks() {
   let totalLine = '';
   if (total > 0) {
     totalLine = '\n' + m.total + ': CHF ' + total;
-    if (discount > 0) totalLine += '\n' + m.discount + ': –CHF ' + discount + '\n' + m.finalTotal + ': CHF ' + finalTotal;
     if (hasConsult) totalLine += '\n' + m.plusConsult;
   }
-
-  let refLine = activeRefCode ? '\n' + m.refCode + ': ' + activeRefCode + ' (' + m.refBy + ' ' + activeRefName + ')' : '';
 
   let dateText = '';
   if (selectedDate && selectedSlot) {
     dateText = '\n' + m.dateReq + ': ' + m.days[selectedDate.getDay()] + ' ' + selectedDate.getDate() + ' ' + m.months[selectedDate.getMonth()] + ' ' + selectedDate.getFullYear() + ' ' + m.at + ' ' + selectedSlot + 'h';
   }
 
-  const msg = m.greeting + '\n\n' + summary + totalLine + refLine + dateText + '\n\n' + m.confirm;
+  const msg = m.greeting + '\n\n' + summary + totalLine + dateText + '\n\n' + m.confirm;
 
   const emailEl = document.getElementById('cartEmailBtn');
   const waEl    = document.getElementById('cartWaBtn');
@@ -4192,7 +3978,7 @@ const TRANSLATIONS = {
     hero_h1_1: 'Limpieza que', hero_h1_2: 'se', hero_h1_em: 'siente.',
     hero_desc: 'Limpieza profesional del hogar para particulares — confiable, minuciosa y adaptada a tus necesidades.',
     hero_cta: 'Presupuesto gratuito',
-    stat1_label: '/ hora limpieza regular', stat2_label: '/ hora limpieza puntual', stat3_label: 'Descuento por recomendación',
+    stat1_label: '/ hora limpieza regular', stat2_label: '/ hora limpieza puntual',
     sec1_num: '01 —', sec1_title: 'Limpieza', sec1_em: 'regular',
     sec1_note: 'Semanal, quincenal o según acuerdo — adaptado a tu rutina diaria.',
     sec2_num: '02 —', sec2_title: 'Limpieza', sec2_em: 'puntual',
@@ -4210,8 +3996,6 @@ const TRANSLATIONS = {
     form_name: 'Tu nombre', form_contact: 'Email o teléfono', form_service: '¿Qué necesitas?', form_msg: 'Mensaje',
     form_submit: 'Enviar mensaje →', form_note: 'Al enviar abres tu app de email con el mensaje listo — un clic y llega a Julienne.',
     success_h3: '¡Solicitud enviada!', success_p: 'Julienne se pondrá en contacto contigo pronto para confirmar la fecha.',
-    coupon_label: '🎁 Tu cupón de referido', coupon_desc: 'Compártelo con alguien — cuando lo use, ambos recibís un <strong>–5%</strong> en vuestra próxima visita.',
-    coupon_copy: '📋 Copiar código', coupon_wa: 'Compartir por WhatsApp',
     cart_empty: 'Aún no has añadido servicios',
     cart_main_service: 'Servicio principal', cart_extras: 'Servicios adicionales',
     cart_total: 'Total estimado', cart_note: '* Los servicios "a consultar" no están incluidos en el total.',
@@ -4220,7 +4004,7 @@ const TRANSLATIONS = {
     btn_add: '+ Añadir al presupuesto', btn_consultar: 'Consultar precio →',
     info_strip_1: '💡 <strong>Precio por hora: CHF 45 / hora.</strong> El precio por visita depende del tiempo real empleado. Las horas indicadas son estimaciones. La duración exacta se acuerda tras una visita gratuita.',
     special_h3: 'Limpieza especial a CHF 55 / hora',
-    special_p: 'Las limpiezas puntuales (post-obra, renovación, limpieza profunda) requieren más esfuerzo porque la suciedad y la cal acumulada <strong>exigen mucho más tiempo y trabajo</strong>. Por eso el precio por hora es mayor.',
+    special_p: 'Las limpiezas puntuales requieren más esfuerzo porque la suciedad y la cal acumulada <strong>exigen mucho más tiempo y trabajo</strong>. Por eso el precio por hora es mayor.',
     reg_cards: [
       { tag: '🏠 Estudio / 1 hab.', size: 'Piso<br>pequeño', rooms: 'aprox. 2 horas', unit: 'CHF / visita', rate: 'CHF 45 / hora · estimado', features: ['Cocina, baño, salón','Aspirado y fregado','Sanitarios'], btn: '+ Añadir al presupuesto' },
       { tag: '🏡 2 – 3 hab.', size: 'Piso<br>mediano', rooms: 'aprox. 3 horas', unit: 'CHF / visita', rate: 'CHF 45 / hora · estimado', features: ['Todas las habitaciones','Cocina y baño a fondo','Espejos y superficies'], btn: '+ Añadir al presupuesto' },
@@ -4256,11 +4040,9 @@ const TRANSLATIONS = {
       { text: '"Como madre de dos niños pequeños, mantener la casa limpia es un verdadero desafío. Desde que Julienne empezó a ayudarnos, nuestro hogar nunca ha lucido mejor. Es increíblemente minuciosa y siempre deja la casa impecable. Es puntual, amable y alguien en quien confío completamente. Su ayuda nos ha dado más tiempo de calidad en familia."', name: 'Ileana M. del Cueto', location: 'Zug · Google Review' },
     ],
     form_service_options: ['— Elige un servicio —','Limpieza regular — Piso pequeño (CHF 90)','Limpieza regular — Piso mediano (CHF 135)','Limpieza regular — Piso grande (CHF 202)','Limpieza puntual — Piso pequeño (CHF 165)','Limpieza puntual — Piso mediano (CHF 245)','Limpieza puntual — Piso grande (CHF 360)','No estoy seguro/a — quiero un presupuesto'],
-    discount_chip: 'Cupón de referido', discount_h3: '–5% para ti y quien recomiendes',
-    discount_p: 'Tras tu primera reserva recibes un cupón personal. Compártelo con alguien — cuando lo use, ambos obtenéis un –5% en vuestra próxima visita.',
     gbusiness_title: 'Julienne López · Reinigungsservice', gbusiness_btn: 'Ver en Google →', gbusiness_sub: 'Luzern & Zug · ⭐ 5.0 · Servicio de limpieza',
     footer_text: 'Servicio de Limpieza · Luzern & Zug · Todos los precios en CHF, válidos 2026',
-    footer_contact: '→ Contactar', ref_banner_title: '¡Descuento de referido aplicado!',
+    footer_contact: '→ Contactar',
     nav_location: 'Luzern & Zug',
     contact_location: 'Luzern & Zug · 2026',
     zona_label: 'Zona de servicio', zona_value: 'Luzern & Zug y alrededores',
@@ -4283,7 +4065,7 @@ const TRANSLATIONS = {
     hero_h1_1: 'Sauberkeit,', hero_h1_2: 'die man', hero_h1_em: 'spürt.',
     hero_desc: 'Professionelle Hausreinigung für Privathaushalte — zuverlässig, gründlich und auf Ihre Bedürfnisse abgestimmt.',
     hero_cta: 'Kostenloses Angebot',
-    stat1_label: '/ Std. regelmässig', stat2_label: '/ Std. Einmalreinigung', stat3_label: 'Empfehlungsrabatt',
+    stat1_label: '/ Std. regelmässig', stat2_label: '/ Std. Einmalreinigung',
     sec1_num: '01 —', sec1_title: 'Regelmässige', sec1_em: 'Reinigung',
     sec1_note: 'Wöchentlich, zweiwöchentlich oder nach Vereinbarung — abgestimmt auf Ihren Alltag.',
     sec2_num: '02 —', sec2_title: 'Einmalige', sec2_em: 'Reinigung',
@@ -4301,14 +4083,10 @@ const TRANSLATIONS = {
     form_name: 'Ihr Name', form_contact: 'E-Mail oder Telefon', form_service: 'Was benötigen Sie?', form_msg: 'Nachricht',
     form_submit: 'Nachricht senden →', form_note: 'Beim Absenden öffnet sich Ihre E-Mail-App mit der fertigen Nachricht.',
     success_h3: 'Anfrage gesendet!', success_p: 'Julienne wird sich bald mit Ihnen in Verbindung setzen.',
-    coupon_label: '🎁 Ihr Empfehlungsgutschein', coupon_desc: 'Teilen Sie ihn — wenn jemand ihn nutzt, erhalten Sie beide –5% Rabatt.',
-    coupon_copy: '📋 Code kopieren', coupon_wa: 'Per WhatsApp teilen',
     cart_empty: 'Noch keine Leistungen hinzugefügt',
     cart_total: 'Geschätzter Gesamtpreis', cart_note: '* Leistungen auf Anfrage sind nicht enthalten.',
     cart_date: '📅 Datum wählen', cart_time: '🕐 Uhrzeit wählen',
     cart_email: '✉️ Per E-Mail reservieren · juliennelh@gmail.com', cart_wa: 'Per WhatsApp senden',
-    discount_chip: 'Empfehlungsgutschein', discount_h3: '–5% für Sie und Ihre Empfehlung',
-    discount_p: 'Nach Ihrer ersten Buchung erhalten Sie einen persönlichen Gutschein. Teilen Sie ihn — wenn jemand ihn nutzt, erhalten Sie beide –5%.',
     gbusiness_title: 'Julienne López · Reinigungsservice', gbusiness_btn: 'Bei Google ansehen →',
     footer_text: 'Reinigungsservice · Luzern & Zug · Alle Preise in CHF, gültig 2026',
     gbusiness_sub: 'Luzern & Zug · ⭐ 5.0 · Reinigungsservice',
@@ -4358,7 +4136,6 @@ const TRANSLATIONS = {
       {text:'"Als Mutter von zwei kleinen Kindern ist es eine echte Herausforderung, das Haus sauber zu halten. Seit Julienne uns hilft, sah unser Zuhause noch nie besser aus. Sie ist unglaublich gründlich und hinterlässt das Haus immer makellos. Sie ist pünktlich, freundlich und jemand, dem ich voll vertraue. Ihre Hilfe hat unserer Familie mehr gemeinsame Zeit geschenkt."',name:'Ileana M. del Cueto',location:'Zug · Google Review'},
     ],
     form_service_options: ['— Bitte wählen —','Regelmässige Reinigung — Kleine Wohnung (CHF 90)','Regelmässige Reinigung — Mittlere Wohnung (CHF 135)','Regelmässige Reinigung — Grosse Wohnung (CHF 202)','Einmalreinigung — Kleine Wohnung (CHF 165)','Einmalreinigung — Mittlere Wohnung (CHF 245)','Einmalreinigung — Grosse Wohnung (CHF 360)','Ich bin unsicher — ich möchte ein Angebot'],
-    ref_banner_title: 'Empfehlungsrabatt angewendet!',
   },
   en: {
     faq_num: '06 —', faq_title: 'Frequently', faq_em: 'asked questions', faq_note: 'Everything you need to know before booking.',
@@ -4376,7 +4153,7 @@ const TRANSLATIONS = {
     hero_h1_1: 'Cleaning you', hero_h1_2: 'can', hero_h1_em: 'feel.',
     hero_desc: 'Professional home cleaning for private clients — reliable, thorough and tailored to your needs.',
     hero_cta: 'Free quote',
-    stat1_label: '/ hr regular cleaning', stat2_label: '/ hr one-time cleaning', stat3_label: 'Referral discount',
+    stat1_label: '/ hr regular cleaning', stat2_label: '/ hr one-time cleaning',
     sec1_num: '01 —', sec1_title: 'Regular', sec1_em: 'cleaning',
     sec1_note: 'Weekly, bi-weekly or as agreed — adapted to your daily routine.',
     sec2_num: '02 —', sec2_title: 'One-time', sec2_em: 'cleaning',
@@ -4394,14 +4171,10 @@ const TRANSLATIONS = {
     form_name: 'Your name', form_contact: 'Email or phone', form_service: 'What do you need?', form_msg: 'Message',
     form_submit: 'Send message →', form_note: 'Sending opens your email app with the message ready — one click and it reaches Julienne.',
     success_h3: 'Request sent!', success_p: 'Julienne will contact you soon to confirm the date.',
-    coupon_label: '🎁 Your referral coupon', coupon_desc: 'Share it — when someone uses it, you both get –5% off your next visit.',
-    coupon_copy: '📋 Copy code', coupon_wa: 'Share on WhatsApp',
     cart_empty: 'No services added yet',
     cart_total: 'Estimated total', cart_note: '* Services "on request" are not included in the total.',
     cart_date: '📅 Choose a date', cart_time: '🕐 Choose a time',
     cart_email: '✉️ Book by email · juliennelh@gmail.com', cart_wa: 'Send via WhatsApp',
-    discount_chip: 'Referral coupon', discount_h3: '–5% for you and your referral',
-    discount_p: 'After your first booking you receive a personal coupon. Share it — when someone uses it, you both get –5% off.',
     gbusiness_title: 'Julienne López · Cleaning Service', gbusiness_btn: 'View on Google →',
     footer_text: 'Cleaning Service · Luzern & Zug · All prices in CHF, valid 2026',
     gbusiness_sub: 'Luzern & Zug · ⭐ 5.0 · Cleaning Service',
@@ -4451,7 +4224,6 @@ const TRANSLATIONS = {
       {text:'"As a mother of two young children, keeping the house clean is a real challenge. Since Julienne started helping us, our home has never looked better. She is incredibly thorough and always leaves the house spotless. She is punctual, friendly, and someone I completely trust. Her help has given our family more quality time together, and that is priceless."',name:'Ileana M. del Cueto',location:'Zug · Google Review'},
     ],
     form_service_options: ['— Choose a service —','Regular cleaning — Small flat (CHF 90)','Regular cleaning — Medium flat (CHF 135)','Regular cleaning — Large flat (CHF 202)','One-time cleaning — Small flat (CHF 165)','One-time cleaning — Medium flat (CHF 245)','One-time cleaning — Large flat (CHF 360)','Not sure — I want a quote'],
-    ref_banner_title: 'Referral discount applied!',
   },
   fr: {
     faq_num: '06 —', faq_title: 'Questions', faq_em: 'fréquentes', faq_note: 'Tout ce que vous devez savoir avant de réserver.',
@@ -4469,7 +4241,7 @@ const TRANSLATIONS = {
     hero_h1_1: 'Une propreté', hero_h1_2: 'qui se', hero_h1_em: 'ressent.',
     hero_desc: 'Nettoyage professionnel à domicile pour particuliers — fiable, minutieux et adapté à vos besoins.',
     hero_cta: 'Devis gratuit',
-    stat1_label: '/ h nettoyage régulier', stat2_label: '/ h nettoyage ponctuel', stat3_label: 'Remise parrainage',
+    stat1_label: '/ h nettoyage régulier', stat2_label: '/ h nettoyage ponctuel',
     sec1_num: '01 —', sec1_title: 'Nettoyage', sec1_em: 'régulier',
     sec1_note: 'Hebdomadaire, bimensuel ou selon accord — adapté à votre quotidien.',
     sec2_num: '02 —', sec2_title: 'Nettoyage', sec2_em: 'ponctuel',
@@ -4487,14 +4259,10 @@ const TRANSLATIONS = {
     form_name: 'Votre nom', form_contact: 'E-mail ou téléphone', form_service: 'Que souhaitez-vous ?', form_msg: 'Message',
     form_submit: 'Envoyer le message →', form_note: 'L\'envoi ouvre votre app e-mail avec le message prêt — un clic et Julienne le reçoit.',
     success_h3: 'Demande envoyée !', success_p: 'Julienne vous contactera bientôt pour confirmer la date.',
-    coupon_label: '🎁 Votre coupon parrainage', coupon_desc: 'Partagez-le — quand quelqu\'un l\'utilise, vous recevez tous les deux –5%.',
-    coupon_copy: '📋 Copier le code', coupon_wa: 'Partager sur WhatsApp',
     cart_empty: 'Aucun service ajouté',
     cart_total: 'Total estimé', cart_note: '* Les services "sur demande" ne sont pas inclus dans le total.',
     cart_date: '📅 Choisir une date', cart_time: '🕐 Choisir un horaire',
     cart_email: '✉️ Réserver par e-mail · juliennelh@gmail.com', cart_wa: 'Envoyer par WhatsApp',
-    discount_chip: 'Coupon parrainage', discount_h3: '–5% pour vous et votre filleul',
-    discount_p: 'Après votre première réservation, vous recevez un coupon personnel. Partagez-le — quand quelqu\'un l\'utilise, vous obtenez tous les deux –5%.',
     gbusiness_title: 'Julienne López · Service de nettoyage', gbusiness_btn: 'Voir sur Google →',
     footer_text: 'Service de nettoyage · Luzern & Zug · Tous les prix en CHF, valables 2026',
     gbusiness_sub: 'Luzern & Zug · ⭐ 5.0 · Service de nettoyage',
@@ -4544,7 +4312,6 @@ const TRANSLATIONS = {
       {text:'"En tant que mère de deux jeunes enfants, garder la maison propre est un vrai défi. Depuis que Julienne nous aide, notre maison n\'a jamais été aussi belle. Elle est incroyablement minutieuse et laisse toujours la maison impeccable. Elle est ponctuelle, amicale et quelqu\'un en qui j\'ai entièrement confiance. Son aide nous a offert plus de temps de qualité en famille."',name:'Ileana M. del Cueto',location:'Zug · Google Review'},
     ],
     form_service_options: ['— Choisir un service —','Nettoyage régulier — Petit appartement (CHF 90)','Nettoyage régulier — Appartement moyen (CHF 135)','Nettoyage régulier — Grand appartement (CHF 202)','Nettoyage ponctuel — Petit appartement (CHF 165)','Nettoyage ponctuel — Appartement moyen (CHF 245)','Nettoyage ponctuel — Grand appartement (CHF 360)','Je ne suis pas sûr(e) — je veux un devis'],
-    ref_banner_title: 'Remise parrainage appliquée !',
   },
   it: {
     faq_num: '06 —', faq_title: 'Domande', faq_em: 'frequenti', faq_note: 'Tutto quello che devi sapere prima di prenotare.',
@@ -4562,7 +4329,7 @@ const TRANSLATIONS = {
     hero_h1_1: 'Pulizia che', hero_h1_2: 'si', hero_h1_em: 'sente.',
     hero_desc: 'Pulizia professionale della casa per privati — affidabile, accurata e adattata alle tue esigenze.',
     hero_cta: 'Preventivo gratuito',
-    stat1_label: '/ ora pulizia regolare', stat2_label: '/ ora pulizia una tantum', stat3_label: 'Sconto referral',
+    stat1_label: '/ ora pulizia regolare', stat2_label: '/ ora pulizia una tantum',
     sec1_num: '01 —', sec1_title: 'Pulizia', sec1_em: 'regolare',
     sec1_note: 'Settimanale, bisettimanale o su accordo — adattato alla tua routine quotidiana.',
     sec2_num: '02 —', sec2_title: 'Pulizia', sec2_em: 'una tantum',
@@ -4580,14 +4347,10 @@ const TRANSLATIONS = {
     form_name: 'Il tuo nome', form_contact: 'E-mail o telefono', form_service: 'Di cosa hai bisogno?', form_msg: 'Messaggio',
     form_submit: 'Invia messaggio →', form_note: 'L\'invio apre la tua app e-mail con il messaggio pronto — un clic e arriva a Julienne.',
     success_h3: 'Richiesta inviata!', success_p: 'Julienne ti contatterà presto per confermare la data.',
-    coupon_label: '🎁 Il tuo coupon referral', coupon_desc: 'Condividilo — quando qualcuno lo usa, entrambi ricevete –5% sulla prossima visita.',
-    coupon_copy: '📋 Copia codice', coupon_wa: 'Condividi su WhatsApp',
     cart_empty: 'Nessun servizio aggiunto',
     cart_total: 'Totale stimato', cart_note: '* I servizi "su richiesta" non sono inclusi nel totale.',
     cart_date: '📅 Scegli una data', cart_time: '🕐 Scegli un orario',
     cart_email: '✉️ Prenota via e-mail · juliennelh@gmail.com', cart_wa: 'Invia via WhatsApp',
-    discount_chip: 'Coupon referral', discount_h3: '–5% per te e chi consigli',
-    discount_p: 'Dopo la prima prenotazione ricevi un coupon personale. Condividilo — quando qualcuno lo usa, entrambi ottenete –5%.',
     gbusiness_title: 'Julienne López · Servizio di pulizia', gbusiness_btn: 'Vedi su Google →',
     footer_text: 'Servizio di pulizia · Luzern & Zug · Tutti i prezzi in CHF, validi 2026',
     gbusiness_sub: 'Luzern & Zug · ⭐ 5.0 · Servizio di pulizia',
@@ -4637,7 +4400,6 @@ const TRANSLATIONS = {
       {text:'"Come madre di due bambini piccoli, mantenere la casa pulita è una vera sfida. Da quando Julienne ha iniziato ad aiutarci, la nostra casa non è mai stata così bella. È incredibilmente accurata e lascia sempre la casa impeccabile. È puntuale, gentile e qualcuno di cui mi fido completamente. Il suo aiuto ci ha regalato più tempo di qualità in famiglia."',name:'Ileana M. del Cueto',location:'Zug · Google Review'},
     ],
     form_service_options: ['— Scegli un servizio —','Pulizia regolare — Appartamento piccolo (CHF 90)','Pulizia regolare — Appartamento medio (CHF 135)','Pulizia regolare — Appartamento grande (CHF 202)','Pulizia una tantum — Appartamento piccolo (CHF 165)','Pulizia una tantum — Appartamento medio (CHF 245)','Pulizia una tantum — Appartamento grande (CHF 360)','Non sono sicuro/a — voglio un preventivo'],
-    ref_banner_title: 'Sconto referral applicato!',
   }
 };
 
@@ -4646,18 +4408,13 @@ const MSG = {
     greeting: 'Hola Julienne! Me gustaría solicitar los siguientes servicios:',
     confirm: '¿Podemos confirmarlo?',
     total: 'Total',
-    discount: 'Descuento referido (–5%)',
-    finalTotal: 'Total final',
     plusConsult: '(+ servicios a consultar)',
-    refCode: 'Código referido',
-    refBy: 'referido por',
     dateReq: 'Fecha solicitada',
     at: 'a las',
     consult: 'a consultar',
     subject: 'Solicitud de limpieza',
     days: ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],
     months: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
-    coupon: '¡Hola! Te recomiendo el servicio de limpieza de Julienne López en Luzern & Zug. Con mi cupón *{code}* tú y yo obtenemos un –5% de descuento 🎁',
     formGreeting: 'Hola Julienne,',
     formIntro: 'Me llamo {name} y me pongo en contacto a través de tu web.',
     formService: 'Servicio de interés',
@@ -4671,18 +4428,13 @@ const MSG = {
     greeting: 'Hallo Julienne! Ich möchte folgende Dienstleistungen anfragen:',
     confirm: 'Können wir das bestätigen?',
     total: 'Gesamt',
-    discount: 'Empfehlungsrabatt (–5%)',
-    finalTotal: 'Endpreis',
     plusConsult: '(+ Leistungen auf Anfrage)',
-    refCode: 'Empfehlungscode',
-    refBy: 'empfohlen von',
     dateReq: 'Gewünschtes Datum',
     at: 'um',
     consult: 'auf Anfrage',
     subject: 'Reinigungsanfrage',
     days: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
     months: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
-    coupon: 'Hallo! Ich empfehle den Reinigungsservice von Julienne López in Luzern & Zug. Mit meinem Gutschein *{code}* erhalten wir beide –5% Rabatt 🎁',
     formGreeting: 'Hallo Julienne,',
     formIntro: 'Mein Name ist {name} und ich kontaktiere Sie über Ihre Website.',
     formService: 'Gewünschte Leistung',
@@ -4696,18 +4448,13 @@ const MSG = {
     greeting: 'Hi Julienne! I would like to request the following services:',
     confirm: 'Can we confirm this?',
     total: 'Total',
-    discount: 'Referral discount (–5%)',
-    finalTotal: 'Final total',
     plusConsult: '(+ services on request)',
-    refCode: 'Referral code',
-    refBy: 'referred by',
     dateReq: 'Requested date',
     at: 'at',
     consult: 'on request',
     subject: 'Cleaning request',
     days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
     months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-    coupon: 'Hi! I recommend the cleaning service of Julienne López in Luzern & Zug. With my coupon *{code}* we both get –5% off 🎁',
     formGreeting: 'Hi Julienne,',
     formIntro: 'My name is {name} and I am contacting you through your website.',
     formService: 'Service of interest',
@@ -4721,18 +4468,13 @@ const MSG = {
     greeting: 'Bonjour Julienne ! Je souhaite demander les services suivants :',
     confirm: 'Pouvons-nous confirmer ?',
     total: 'Total',
-    discount: 'Remise parrainage (–5%)',
-    finalTotal: 'Total final',
     plusConsult: '(+ services sur demande)',
-    refCode: 'Code parrainage',
-    refBy: 'parrainé par',
     dateReq: 'Date souhaitée',
     at: 'à',
     consult: 'sur demande',
     subject: 'Demande de nettoyage',
     days: ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'],
     months: ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
-    coupon: 'Bonjour ! Je recommande le service de nettoyage de Julienne López à Luzern & Zug. Avec mon coupon *{code}* nous obtenons tous les deux –5% 🎁',
     formGreeting: 'Bonjour Julienne,',
     formIntro: 'Je m\'appelle {name} et je vous contacte via votre site web.',
     formService: 'Service souhaité',
@@ -4746,18 +4488,13 @@ const MSG = {
     greeting: 'Ciao Julienne! Vorrei richiedere i seguenti servizi:',
     confirm: 'Possiamo confermare?',
     total: 'Totale',
-    discount: 'Sconto referral (–5%)',
-    finalTotal: 'Totale finale',
     plusConsult: '(+ servizi su richiesta)',
-    refCode: 'Codice referral',
-    refBy: 'consigliato da',
     dateReq: 'Data richiesta',
     at: 'alle',
     consult: 'su richiesta',
     subject: 'Richiesta di pulizia',
     days: ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'],
     months: ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
-    coupon: 'Ciao! Consiglio il servizio di pulizia di Julienne López a Luzern & Zug. Con il mio coupon *{code}* entrambi otteniamo –5% 🎁',
     formGreeting: 'Ciao Julienne,',
     formIntro: 'Mi chiamo {name} e ti contatto tramite il tuo sito web.',
     formService: 'Servizio di interesse',
@@ -4947,11 +4684,6 @@ function setLang(lang) {
   const gbTitle = document.querySelector('.gbusiness-title'); if (gbTitle) gbTitle.textContent = t.gbusiness_title;
   const gbSub   = document.querySelector('.gbusiness-sub');   if (gbSub)   gbSub.textContent   = t.gbusiness_sub || 'Luzern & Zug · ⭐ 5.0';
 
-  // ── Discount ──
-  const discChip = document.querySelector('.discount-chip'); if (discChip) discChip.textContent = t.discount_chip;
-  const discH3   = document.querySelector('.discount-card h3'); if (discH3) discH3.textContent = t.discount_h3;
-  const discP    = document.querySelector('.discount-card p');  if (discP)  discP.textContent   = t.discount_p;
-
 
 
   // ── Contact form ──
@@ -4991,11 +4723,6 @@ function setLang(lang) {
     if (aEl && t['faq_a' + i]) aEl.textContent = t['faq_a' + i];
   }
 
-  // Ref banner
-  const refBannerTitle = document.getElementById('refBannerTitle');
-  if (refBannerTitle && activeRefName) {
-    refBannerTitle.textContent = t.ref_banner_title || '¡Descuento de referido aplicado!';
-  }
 
   document.documentElement.lang = lang;
 
@@ -5005,7 +4732,6 @@ function setLang(lang) {
 
 // Auto-detect browser language on load
 window.addEventListener('DOMContentLoaded', function() {
-  detectReferral();
   loadCartFromStorage();
   const browserLang = (navigator.language || 'es').substring(0, 2).toLowerCase();
   const supported = ['es','de','en','fr','it'];
@@ -5106,7 +4832,6 @@ function submitContactForm() {
     if (res.ok) {
       document.getElementById('contactFormCard').style.display = 'none';
       document.getElementById('contactSuccess').style.display  = 'block';
-      showGeneratedCoupon(name);
     } else {
       alert('Hubo un problema al enviar. Por favor escribe directamente a juliennelh@gmail.com');
     }
@@ -5427,8 +5152,8 @@ function rejectCookies() {
   // Scroll-reveal elements
   var reveals = document.querySelectorAll(
     '.section-header, .price-card, .extra-card, .testimonial-card, ' +
-    '.benefit-card, .faq-item, .discount-card, .contact-info, .contact-form-card, ' +
-    '.gbusiness-bar, .referral-section'
+    '.benefit-card, .faq-item, .contact-info, .contact-form-card, ' +
+    '.gbusiness-bar'
   );
   reveals.forEach(function(el) {
     el.style.opacity = '0';
@@ -5517,7 +5242,6 @@ const CB_FAQ = {
       {label: '❌ Cancelar', key: 'cancel'},
       {label: '🧴 Productos', key: 'products'},
       {label: '⭐ Referencias', key: 'refs'},
-      {label: '🎁 Descuento', key: 'discount'},
     ],
     answers: {
       prices: 'Limpieza regular: CHF 45/hora (piso pequeño ~2h = CHF 90, mediano ~3h = CHF 135, grande ~4.5h = CHF 202). Limpieza puntual: CHF 55/hora (profunda, renovación, post-obra). Casas 6+ habitaciones: precio tras visita gratuita.',
@@ -5531,7 +5255,6 @@ const CB_FAQ = {
       cancel: 'Puedes cancelar o cambiar fecha con 24h de antelación sin coste. Con menos de 24h puede aplicarse un 50%. Contáctame por WhatsApp.',
       products: 'No traigo productos de limpieza — el cliente proporciona los productos y materiales necesarios. Si no sabes qué tener, te oriento al reservar.',
       refs: 'Tengo una valoración de 5.0 en Google Business. Puedo ponerte en contacto con clientes actuales como Vicky, Nicole o Ileana para que compartan su experiencia.',
-      discount: 'Tras tu primera reserva recibes un cupón personal de -5%. Compártelo con alguien — cuando lo use, ambos recibís -5% en la próxima visita.',
     },
     waPrompt: '¿Quieres que hablemos por WhatsApp?',
     waBtn: '💬 Abrir WhatsApp',
@@ -5552,7 +5275,6 @@ const CB_FAQ = {
       {label: '❌ Stornieren', key: 'cancel'},
       {label: '🧴 Produkte', key: 'products'},
       {label: '⭐ Referenzen', key: 'refs'},
-      {label: '🎁 Rabatt', key: 'discount'},
     ],
     answers: {
       prices: 'Regelmässige Reinigung: CHF 45/Std. (kleine Whg ~2Std = CHF 90, mittlere ~3Std = CHF 135, grosse ~4.5Std = CHF 202). Einmalreinigung: CHF 55/Std. Häuser 6+ Zimmer: Preis nach kostenloser Besichtigung.',
@@ -5566,7 +5288,6 @@ const CB_FAQ = {
       cancel: 'Stornierung/Umbuchung bis 24 Std. vorher kostenlos. Unter 24 Std. kann 50% berechnet werden. Kontakt per WhatsApp.',
       products: 'Ich bringe keine Reinigungsmittel mit — der Kunde stellt Produkte und Materialien bereit. Gerne berate ich bei der Buchung.',
       refs: '5.0 Bewertung auf Google Business. Ich kann Kontakt zu aktuellen Kundinnen wie Vicky, Nicole oder Ileana herstellen.',
-      discount: 'Nach der ersten Buchung erhalten Sie einen persönlichen -5% Gutschein. Teilen Sie ihn — beide erhalten -5% auf den nächsten Einsatz.',
     },
     waPrompt: 'Möchten Sie per WhatsApp sprechen?',
     waBtn: '💬 WhatsApp öffnen',
@@ -5587,7 +5308,6 @@ const CB_FAQ = {
       {label: '❌ Cancel', key: 'cancel'},
       {label: '🧴 Products', key: 'products'},
       {label: '⭐ References', key: 'refs'},
-      {label: '🎁 Discount', key: 'discount'},
     ],
     answers: {
       prices: 'Regular cleaning: CHF 45/hr (small flat ~2h = CHF 90, medium ~3h = CHF 135, large ~4.5h = CHF 202). One-time cleaning: CHF 55/hr (deep clean, renovation, post-renovation). Houses 6+ rooms: price after free visit.',
@@ -5601,7 +5321,6 @@ const CB_FAQ = {
       cancel: 'Free cancellation/reschedule up to 24h before. Under 24h a 50% charge may apply. Contact via WhatsApp.',
       products: 'I do not bring cleaning products — the client provides products and materials. I can advise you when booking.',
       refs: '5.0 rating on Google Business. I can connect you with current clients like Vicky, Nicole or Ileana to share their experience.',
-      discount: 'After your first booking you get a personal -5% coupon. Share it — when someone uses it, you both get -5% off your next visit.',
     },
     waPrompt: 'Would you like to chat on WhatsApp?',
     waBtn: '💬 Open WhatsApp',
@@ -5622,7 +5341,6 @@ const CB_FAQ = {
       {label: '❌ Annuler', key: 'cancel'},
       {label: '🧴 Produits', key: 'products'},
       {label: '⭐ Références', key: 'refs'},
-      {label: '🎁 Remise', key: 'discount'},
     ],
     answers: {
       prices: 'Nettoyage régulier : CHF 45/h (petit appt ~2h = CHF 90, moyen ~3h = CHF 135, grand ~4.5h = CHF 202). Nettoyage ponctuel : CHF 55/h. Maisons 6+ ch : prix après visite gratuite.',
@@ -5636,7 +5354,6 @@ const CB_FAQ = {
       cancel: 'Annulation/report gratuit jusqu\'à 24h avant. Moins de 24h : 50% possible. Contact par WhatsApp.',
       products: 'Je n\'apporte pas de produits — le client fournit produits et matériaux. Je vous conseille lors de la réservation.',
       refs: 'Note 5.0 sur Google Business. Je peux vous mettre en contact avec des clientes comme Vicky, Nicole ou Ileana.',
-      discount: 'Après la première réservation, vous recevez un coupon -5%. Partagez-le — quand quelqu\'un l\'utilise, vous obtenez tous les deux -5%.',
     },
     waPrompt: 'Voulez-vous discuter sur WhatsApp ?',
     waBtn: '💬 Ouvrir WhatsApp',
@@ -5657,7 +5374,6 @@ const CB_FAQ = {
       {label: '❌ Annullare', key: 'cancel'},
       {label: '🧴 Prodotti', key: 'products'},
       {label: '⭐ Referenze', key: 'refs'},
-      {label: '🎁 Sconto', key: 'discount'},
     ],
     answers: {
       prices: 'Pulizia regolare: CHF 45/ora (piccolo ~2h = CHF 90, medio ~3h = CHF 135, grande ~4.5h = CHF 202). Una tantum: CHF 55/ora. Case 6+ camere: prezzo dopo visita gratuita.',
@@ -5671,7 +5387,6 @@ const CB_FAQ = {
       cancel: 'Cancellazione/modifica gratuita fino a 24h prima. Sotto 24h possibile addebito 50%. Contatto WhatsApp.',
       products: 'Non porto prodotti — il cliente fornisce prodotti e materiali. Ti consiglio al momento della prenotazione.',
       refs: 'Valutazione 5.0 su Google Business. Posso metterti in contatto con clienti come Vicky, Nicole o Ileana.',
-      discount: 'Dopo la prima prenotazione ricevi un coupon -5%. Condividilo — quando qualcuno lo usa, entrambi ottenete -5%.',
     },
     waPrompt: 'Vuoi chattare su WhatsApp?',
     waBtn: '💬 Apri WhatsApp',

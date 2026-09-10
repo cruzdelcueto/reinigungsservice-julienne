@@ -700,6 +700,15 @@ main {
   overflow: hidden;
 }
 
+.price-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 /* ─── EXTRAS ─── */
 .extras-section { padding-bottom: 80px; }
 
@@ -2045,7 +2054,7 @@ footer strong {
   .hero-stats { padding: 0 20px; flex-wrap: wrap; }
   .stat-item { min-width: 50%; border-right: none; padding-left: 0; padding-right: 0; }
   .container { padding: 0 20px; }
-  .price-grid, .price-grid-3 { grid-template-columns: 1fr; }
+  .price-grid, .price-grid-3, .price-grid-2 { grid-template-columns: 1fr; }
   .extras-grid { grid-template-columns: 1fr; }
   footer { padding: 32px 20px; }
 }
@@ -3018,6 +3027,47 @@ main > *:not(.sections-video) {
           <li><span class="feat-dot"></span>Todas las zonas incluidas</li>
         </ul>
         <button class="add-to-cart" onclick="addToCart('Limpieza puntual — Piso grande', '4–5 hab. · aprox. 6–7h', 360, this)">+ Añadir al presupuesto</button>
+      </div>
+    </div>
+
+    <div class="section-header" style="border-bottom:none; border-top:1px solid var(--border); margin-top:56px; padding-top:56px; padding-bottom:0;">
+      <div>
+        <h2 class="section-title"><span data-i18n="specialized_title">Servicios</span> <em data-i18n="specialized_em">especializados</em></h2>
+      </div>
+      <p class="section-note" data-i18n="specialized_note">Limpiezas específicas, con condiciones y precios propios.</p>
+    </div>
+
+    <div class="price-grid-2" style="margin-top:36px;">
+      <div class="price-card">
+        <div class="card-tag">🏋️ Gimnasio / Sala fitness</div>
+        <div class="card-size">Limpieza<br>gimnasio</div>
+        <div class="card-rooms">Duración según tamaño del espacio</div>
+        <div class="price-amount">55</div>
+        <div class="price-unit">CHF / hora</div>
+        <div class="price-rate">Todo incluido · sin extras</div>
+        <ul class="card-features">
+          <li><span class="feat-dot"></span>Máquinas y aparatos de musculación</li>
+          <li><span class="feat-dot"></span>Espejos y superficies de cristal</li>
+          <li><span class="feat-dot"></span>Vestuarios y taquillas</li>
+          <li><span class="feat-dot"></span>Duchas y zona de aseos</li>
+        </ul>
+        <a href="#contacto" class="add-to-cart" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;" onclick="prefilContact('gym')">Consultar precio →</a>
+      </div>
+
+      <div class="price-card">
+        <div class="card-tag">📦 Mudanza / Entrega de llaves</div>
+        <div class="card-size">Limpieza<br>mudanza</div>
+        <div class="card-rooms">Antes de entregar o al recibir las llaves</div>
+        <div class="price-amount" style="font-size:34px; margin-bottom: 6px;">Precio fijo</div>
+        <div class="price-unit">tras visita o fotos</div>
+        <div class="price-rate">Sujeto a valoración previa</div>
+        <ul class="card-features">
+          <li><span class="feat-dot"></span>Armarios, cajones y estanterías vacíos</li>
+          <li><span class="feat-dot"></span>Cocina y electrodomésticos a fondo</li>
+          <li><span class="feat-dot"></span>Baños, azulejos y sanitarios</li>
+          <li><span class="feat-dot"></span>Suelos, rodapiés y cristales</li>
+        </ul>
+        <a href="#contacto" class="add-to-cart" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;" onclick="prefilContact('moving')">Consultar precio →</a>
       </div>
     </div>
   </div>
@@ -4016,6 +4066,12 @@ const TRANSLATIONS = {
       { tag: '🏡 2 – 3 hab.', size: 'Limpieza<br>puntual', rooms: 'aprox. 4.5 horas', unit: 'CHF / visita', rate: 'CHF 55 / hora · estimado', features: ['Electrodomésticos y armarios por dentro','Interruptores y detalles'], btn: '+ Añadir al presupuesto' },
       { tag: '🏘️ 4 – 5 hab.', size: 'Limpieza<br>puntual', rooms: 'aprox. 6–7 horas', unit: 'CHF / visita', rate: 'CHF 55 / hora · estimado', features: ['Limpieza profunda completa','Todas las zonas incluidas'], btn: '+ Añadir al presupuesto' },
     ],
+    specialized_title: 'Servicios', specialized_em: 'especializados',
+    specialized_note: 'Limpiezas específicas, con condiciones y precios propios.',
+    specialized_cards: [
+      { tag: '🏋️ Gimnasio / Sala fitness', size: 'Limpieza<br>gimnasio', rooms: 'Duración según tamaño del espacio', unit: 'CHF / hora', rate: 'Todo incluido · sin extras', features: ['Máquinas y aparatos de musculación','Espejos y superficies de cristal','Vestuarios y taquillas','Duchas y zona de aseos'], btn: 'Consultar precio →' },
+      { tag: '📦 Mudanza / Entrega de llaves', size: 'Limpieza<br>mudanza', rooms: 'Antes de entregar o al recibir las llaves', unit: 'tras visita o fotos', rate: 'Sujeto a valoración previa', price_text: 'Precio fijo', features: ['Armarios, cajones y estanterías vacíos','Cocina y electrodomésticos a fondo','Baños, azulejos y sanitarios','Suelos, rodapiés y cristales'], btn: 'Consultar precio →' },
+    ],
     extras: [
       { name: 'Mascotas (perro/gato)', desc: 'Mayor esfuerzo por pelos, desinfección y olores' },
       { name: 'Limpieza de ventanas', desc: 'Por dentro o por ambos lados — precio según cantidad y tamaño' },
@@ -4112,6 +4168,12 @@ const TRANSLATIONS = {
       {tag:'🏡 2 – 3 Zi.',size:'Einmal-<br>reinigung',rooms:'ca. 4.5 Std.',unit:'CHF / Einsatz',rate:'CHF 55 / Std. · geschätzt',features:['Geräte & Schränke innen','Lichtschalter & Details'],btn:'+ Zum Angebot'},
       {tag:'🏘️ 4 – 5 Zi.',size:'Einmal-<br>reinigung',rooms:'ca. 6–7 Std.',unit:'CHF / Einsatz',rate:'CHF 55 / Std. · geschätzt',features:['Vollständige Tiefenreinigung','Alle Bereiche inklusive'],btn:'+ Zum Angebot'},
     ],
+    specialized_title: 'Spezialisierte', specialized_em: 'Leistungen',
+    specialized_note: 'Spezifische Reinigungen mit eigenen Bedingungen und Preisen.',
+    specialized_cards: [
+      {tag:'🏋️ Fitnessstudio / Trainingsraum',size:'Fitnessstudio-<br>reinigung',rooms:'Dauer je nach Grösse des Raums',unit:'CHF / Std.',rate:'Alles inklusive · keine Zusatzkosten',features:['Geräte und Trainingsmaschinen','Spiegel und Glasflächen','Umkleiden und Spinde','Duschen und Sanitärbereich'],btn:'Preis anfragen →'},
+      {tag:'📦 Umzug / Schlüsselübergabe',size:'Umzugs-<br>reinigung',rooms:'Vor Übergabe oder bei Schlüsselerhalt',unit:'nach Besichtigung oder Fotos',rate:'Nach vorheriger Einschätzung',price_text:'Festpreis',features:['Schränke, Schubladen und Regale geleert','Küche und Geräte gründlich gereinigt','Bäder, Fliesen und Sanitäranlagen','Böden, Sockelleisten und Fenster'],btn:'Preis anfragen →'},
+    ],
     extras: [
       {name:'Haustiere (Hund/Katze)',desc:'Erhöhter Aufwand für Tierhaare, Desinfektion & Geruch'},
       {name:'Fensterreinigung',desc:'Innen oder beidseitig — Preis nach Anzahl & Grösse'},
@@ -4199,6 +4261,12 @@ const TRANSLATIONS = {
       {tag:'🏠 Studio / 1 bed',size:'One-time<br>clean',rooms:'approx. 3 hours',unit:'CHF / visit',rate:'CHF 55 / hr · estimated',features:['Deep clean bathroom & WC','Kitchen & oven included'],btn:'+ Add to quote'},
       {tag:'🏡 2 – 3 bed',size:'One-time<br>clean',rooms:'approx. 4.5 hours',unit:'CHF / visit',rate:'CHF 55 / hr · estimated',features:['Appliances & cupboards inside','Switches & details'],btn:'+ Add to quote'},
       {tag:'🏘️ 4 – 5 bed',size:'One-time<br>clean',rooms:'approx. 6–7 hours',unit:'CHF / visit',rate:'CHF 55 / hr · estimated',features:['Full deep clean','All areas included'],btn:'+ Add to quote'},
+    ],
+    specialized_title: 'Specialized', specialized_em: 'services',
+    specialized_note: 'Specific cleanings, with their own conditions and pricing.',
+    specialized_cards: [
+      {tag:'🏋️ Gym / Fitness studio',size:'Gym<br>cleaning',rooms:'Duration depends on the size of the space',unit:'CHF / hr',rate:'Everything included · no extras',features:['Machines and gym equipment','Mirrors and glass surfaces','Changing rooms and lockers','Showers and restroom area'],btn:'Request a quote →'},
+      {tag:'📦 Move-out / Key handover',size:'Move-out<br>cleaning',rooms:'Before handover or when receiving the keys',unit:'after a visit or photos',rate:'Subject to prior assessment',price_text:'Fixed price',features:['Wardrobes, drawers and shelves emptied','Kitchen and appliances deep-cleaned','Bathrooms, tiles and fixtures','Floors, skirting boards and windows'],btn:'Request a quote →'},
     ],
     extras: [
       {name:'Pets (dog/cat)',desc:'Extra effort for hair, disinfection and odours'},
@@ -4288,6 +4356,12 @@ const TRANSLATIONS = {
       {tag:'🏡 2 – 3 ch.',size:'Nettoyage<br>ponctuel',rooms:'env. 4.5 heures',unit:'CHF / visite',rate:'CHF 55 / h · estimé',features:['Appareils & armoires à l\'intérieur','Interrupteurs & détails'],btn:'+ Ajouter au devis'},
       {tag:'🏘️ 4 – 5 ch.',size:'Nettoyage<br>ponctuel',rooms:'env. 6–7 heures',unit:'CHF / visite',rate:'CHF 55 / h · estimé',features:['Nettoyage en profondeur complet','Toutes les zones incluses'],btn:'+ Ajouter au devis'},
     ],
+    specialized_title: 'Services', specialized_em: 'spécialisés',
+    specialized_note: 'Nettoyages spécifiques, avec conditions et tarifs propres.',
+    specialized_cards: [
+      {tag:'🏋️ Salle de sport / Fitness',size:'Nettoyage<br>salle de sport',rooms:'Durée selon la taille de l\'espace',unit:'CHF / h',rate:'Tout compris · sans extras',features:['Machines et appareils de musculation','Miroirs et surfaces vitrées','Vestiaires et casiers','Douches et sanitaires'],btn:'Demander un devis →'},
+      {tag:'📦 Déménagement / Remise des clés',size:'Nettoyage<br>déménagement',rooms:'Avant remise ou à la réception des clés',unit:'après visite ou photos',rate:'Sous réserve d\'évaluation préalable',price_text:'Prix fixe',features:['Armoires, tiroirs et étagères vides','Cuisine et électroménagers en profondeur','Salles de bain, carrelage et sanitaires','Sols, plinthes et vitres'],btn:'Demander un devis →'},
+    ],
     extras: [
       {name:'Animaux (chien/chat)',desc:'Effort supplémentaire pour les poils, désinfection et odeurs'},
       {name:'Nettoyage des vitres',desc:'Intérieur ou des deux côtés — prix selon quantité et taille'},
@@ -4375,6 +4449,12 @@ const TRANSLATIONS = {
       {tag:'🏠 Monolocale / 1 cam.',size:'Pulizia<br>una tantum',rooms:'circa 3 ore',unit:'CHF / visita',rate:'CHF 55 / ora · stimato',features:['Pulizia profonda bagno e WC','Cucina e forno inclusi'],btn:'+ Aggiungi al preventivo'},
       {tag:'🏡 2 – 3 cam.',size:'Pulizia<br>una tantum',rooms:'circa 4.5 ore',unit:'CHF / visita',rate:'CHF 55 / ora · stimato',features:['Elettrodomestici e armadi dentro','Interruttori e dettagli'],btn:'+ Aggiungi al preventivo'},
       {tag:'🏘️ 4 – 5 cam.',size:'Pulizia<br>una tantum',rooms:'circa 6–7 ore',unit:'CHF / visita',rate:'CHF 55 / ora · stimato',features:['Pulizia profonda completa','Tutte le zone incluse'],btn:'+ Aggiungi al preventivo'},
+    ],
+    specialized_title: 'Servizi', specialized_em: 'specializzati',
+    specialized_note: 'Pulizie specifiche, con condizioni e prezzi propri.',
+    specialized_cards: [
+      {tag:'🏋️ Palestra / Sala fitness',size:'Pulizia<br>palestra',rooms:'Durata secondo le dimensioni dello spazio',unit:'CHF / ora',rate:'Tutto incluso · senza extra',features:['Macchine e attrezzi da palestra','Specchi e superfici in vetro','Spogliatoi e armadietti','Docce e servizi igienici'],btn:'Richiedi preventivo →'},
+      {tag:'📦 Trasloco / Consegna chiavi',size:'Pulizia<br>trasloco',rooms:'Prima della consegna o al ritiro delle chiavi',unit:'dopo sopralluogo o foto',rate:'Soggetto a valutazione preventiva',price_text:'Prezzo fisso',features:['Armadi, cassetti e scaffali vuoti','Cucina ed elettrodomestici a fondo','Bagni, piastrelle e sanitari','Pavimenti, battiscopa e vetri'],btn:'Richiedi preventivo →'},
     ],
     extras: [
       {name:'Animali (cane/gatto)',desc:'Maggiore sforzo per peli, disinfezione e odori'},
@@ -4633,6 +4713,26 @@ function setLang(lang) {
     if (btn) btn.textContent = d.btn || t.btn_add;
   });
 
+  // ── Price cards — Specialized (gym & moving) ──
+  const specCards = document.querySelectorAll('.price-grid-2 .price-card');
+  const specData = t.specialized_cards || [];
+  specCards.forEach((card, i) => {
+    if (!specData[i]) return;
+    const d = specData[i];
+    const tag   = card.querySelector('.card-tag');   if (tag)   tag.textContent   = d.tag;
+    const size  = card.querySelector('.card-size');  if (size)  size.innerHTML    = d.size;
+    const rooms = card.querySelector('.card-rooms'); if (rooms) rooms.textContent = d.rooms;
+    const unit  = card.querySelector('.price-unit'); if (unit)  unit.textContent  = d.unit;
+    const rate  = card.querySelector('.price-rate'); if (rate)  rate.textContent  = d.rate;
+    const pAmt  = card.querySelector('.price-amount'); if (pAmt && d.price_text) pAmt.textContent = d.price_text;
+    const feats = card.querySelectorAll('.card-features li');
+    if (d.features) d.features.forEach((f, j) => {
+      if (feats[j]) feats[j].innerHTML = '<span class="feat-dot"></span>' + f;
+    });
+    const btn = card.querySelector('.add-to-cart');
+    if (btn) btn.textContent = d.btn || t.btn_consultar;
+  });
+
   // ── Special banner ──
   const specH3 = document.querySelector('.special-banner h3');
   const specP  = document.querySelector('.special-banner p');
@@ -4745,6 +4845,8 @@ var PREFIL_SERVICES = {
   pets:      { es:'Suplemento mascotas', de:'Haustierzuschlag', en:'Pet surcharge', fr:'Supplément animaux', it:'Supplemento animali' },
   windows:   { es:'Limpieza de ventanas', de:'Fensterreinigung', en:'Window cleaning', fr:'Nettoyage des vitres', it:'Pulizia finestre' },
   post_reno: { es:'Limpieza post-obra', de:'Reinigung nach Renovation', en:'Post-renovation cleaning', fr:'Nettoyage après travaux', it:'Pulizia post-ristrutturazione' },
+  gym:       { es:'Limpieza de gimnasio', de:'Fitnessstudio-Reinigung', en:'Gym cleaning', fr:'Nettoyage de salle de sport', it:'Pulizia palestra' },
+  moving:    { es:'Limpieza de mudanza', de:'Umzugsreinigung', en:'Move-out cleaning', fr:'Nettoyage de déménagement', it:'Pulizia trasloco' },
 };
 
 function prefilContact(serviceKey) {
